@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Medlink Dialysis Center</title>
+    <script type="importmap"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+        theme: {
+        extend: {
+        fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+        colors: {
+        sidebar: '#0F1117',
+        }
+        }
+        }
+        }
+    </script>
+    <style>
+        body {
+        font-family: 'DM Sans', sans-serif;
+        }
+
+        .nav-link-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: #9CA3AF;
+        font-size: 14px;
+        transition: all .15s;
+        margin-bottom: 2px;
+        }
+
+        .nav-link-item:hover {
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        text-decoration: none;
+        }
+
+        .nav-link-item.active {
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        font-weight: 500;
+        }
+
+        .nav-link-item svg {
+        flex-shrink: 0;
+        opacity: 0.7;
+        }
+
+        .nav-link-item:hover svg, .nav-link-item.active svg {
+        opacity: 1;
+        }
+
+        .nav-disabled {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 9px 12px;
+        border-radius: 8px;
+        color: #9CA3AF;
+        font-size: 14px;
+        margin-bottom: 2px;
+        opacity: 0.4;
+        cursor: not-allowed;
+        }
+
+        #sidebar {
+        transition: transform .25s ease;
+        }
+
+        #overlay {
+        display: none;
+        }
+
+        #overlay.open {
+        display: block;
+        }
+
+        @@media (max-width: 768px) {
+        #sidebar {
+        transform: translateX(-100%);
+        }
+
+        #sidebar.open {
+        transform: translateX(0);
+        }
+
+        #main-wrapper {
+        margin-left: 0 !important;
+        }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Mobile topbar -->
+    <div class="md:hidden fixed top-0 left-0 right-0 h-14 bg-[#0F1117] flex items-center px-4 gap-3 z-50">
+        <button onclick="toggleSidebar()" class="text-white p-1.5 rounded-md hover:bg-white/10">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
+        </button>
+        <span class="text-white text-sm font-semibold">Medlink</span>
+    </div>
+
+    <!-- Overlay -->
+    <div id="overlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/50 z-40 md:hidden"></div>
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed top-0 left-0 w-[230px] h-screen bg-[#0F1117] flex flex-col z-50">
+
+        <!-- Brand -->
+        <div class="px-5 py-5 border-b border-white/[0.06]">
+            <a asp-controller="Home" asp-action="Index" class="flex items-center gap-2.5 no-underline">
+                <div class="w-9 h-9 rounded-[9px] bg-blue-600 flex items-center justify-center flex-shrink-0">
+                    <svg width="18" height="18" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>
+                </div>
+                <div>
+                    <div class="text-white text-sm font-semibold leading-tight">Medlink</div>
+                    <div class="text-gray-500 text-[11px]">Dialysis Center</div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 px-2.5 py-3 overflow-y-auto">
+            <div class="text-[10px] font-semibold text-white/25 uppercase tracking-widest px-2.5 pt-3 pb-1.5">Main</div>
+
+            <a asp-controller="Home" asp-action="Index"
+               class="nav-link-item @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home" ? "active" : "")">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" /><rect x="14" y="3" width="7" height="7" /><rect x="14" y="14" width="7" height="7" /><rect x="3" y="14" width="7" height="7" /></svg>
+                Dashboard
+            </a>
+
+            <a asp-controller="Patients" asp-action="Index"
+               class="nav-link-item @(ViewContext.RouteData.Values["controller"]?.ToString() == "Patients" ? "active" : "")">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
+                Patients
+            </a>
+
+            <div class="text-[10px] font-semibold text-white/25 uppercase tracking-widest px-2.5 pt-4 pb-1.5">Coming Soon</div>
+
+            <a asp-controller="PhilhealthRequirements" asp-action="Index"
+               class="nav-link-item @(ViewContext.RouteData.Values["controller"]?.ToString() == "PhilhealthRequirements" ? "active" : "")">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" /><rect x="9" y="3" width="6" height="4" rx="1" /></svg>
+                PhilHealth Tracker
+            </a>
+
+            <span class="nav-disabled">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
+                Lab Results
+                <span class="ml-auto bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">Soon</span>
+            </span>
+
+            <span class="nav-disabled">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>
+                Billing
+                <span class="ml-auto bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">Soon</span>
+            </span>
+
+            <span class="nav-disabled">
+                <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14" /></svg>
+                Machines
+                <span class="ml-auto bg-blue-600 text-white text-[10px] font-semibold px-2 py-0.5 rounded-full">Soon</span>
+            </span>
+        </nav>
+
+        <!-- Footer -->
+        <div class="px-2.5 py-3.5 border-t border-white/[0.06]">
+            <div class="flex items-center gap-2.5 px-3 py-2">
+                <div class="w-2 h-2 rounded-full bg-green-500 flex-shrink-0 shadow-[0_0_0_3px_rgba(34,197,94,0.2)]"></div>
+                <div class="text-xs text-gray-500">
+                    <span class="text-white/60 font-medium">System Online</span><br>
+                    v1.0 · @DateTime.Now.ToString("MMM yyyy")
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Topbar -->
+    <div class="hidden md:flex fixed top-0 left-[230px] right-0 h-14 bg-white border-b border-gray-200 items-center px-7 gap-3 z-40">
+        <span class="text-sm font-semibold text-gray-900 flex-1">@(ViewData["Title"] ?? "Dashboard")</span>
+        <span class="text-sm text-gray-400">@DateTime.Now.ToString("ddd, MMM dd yyyy")</span>
+        <div class="w-px h-5 bg-gray-200"></div>
+        <div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-sm font-semibold">M</div>
+    </div>
+
+    <!-- Main content -->
+    <div id="main-wrapper" class="ml-[230px] pt-14 min-h-screen flex flex-col">
+        <div class="p-8 w-full flex-1">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('overlay').classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

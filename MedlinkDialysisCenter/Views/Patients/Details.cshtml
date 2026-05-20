@@ -1,0 +1,150 @@
+@model MedlinkDialysisCenter.Models.Patient
+
+@{
+    ViewData["Title"] = "Patient Details";
+}
+
+<!-- Header -->
+<div class="flex items-center justify-between mb-6 pt-1">
+    <div class="flex items-center gap-3.5">
+        <a asp-action="Index"
+           class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+        </a>
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight m-0">Patient Details</h1>
+            <p class="text-sm text-gray-500 mt-0.5">Full record overview</p>
+        </div>
+    </div>
+    <div class="hidden md:flex items-center gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.PatientId"
+           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 no-underline hover:text-gray-800 hover:border-gray-400 transition-all">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+            Edit
+        </a>
+        <a asp-action="Index"
+           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium no-underline hover:bg-blue-700 transition-colors shadow-sm">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+            Back to List
+        </a>
+    </div>
+</div>
+
+<!-- Profile Card -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 flex items-center gap-5 mb-5">
+    <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-semibold flex-shrink-0">
+        @Model.FirstName[0]@Model.LastName[0]
+    </div>
+    <div>
+        <h2 class="text-xl font-semibold tracking-tight m-0 mb-1.5">@Model.FullName</h2>
+        <div class="flex items-center gap-3 flex-wrap">
+            <span class="text-sm text-gray-400 font-mono">#@Model.PatientId.ToString("D4")</span>
+            @if (!string.IsNullOrEmpty(Model.Gender))
+            {
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium @(Model.Gender == "Female" ? "bg-purple-50 text-purple-700" : "bg-blue-50 text-blue-700")">
+                    @Model.Gender
+                </span>
+            }
+            <span class="text-sm text-gray-400">Registered @Model.CreatedAt.ToString("MMMM dd, yyyy")</span>
+        </div>
+    </div>
+</div>
+
+<!-- Info Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
+            Personal Information
+        </div>
+        <div>
+            <div class="flex items-start px-5 py-3.5 border-b border-gray-100">
+                <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">Date of Birth</div>
+                <div class="text-sm font-medium text-gray-900">
+                    @if (Model.DateOfBirth.HasValue)
+                    {
+                        @Model.DateOfBirth.Value.ToString("MMMM dd, yyyy")
+                        <span class="text-xs text-gray-400 ml-1.5">(@((DateTime.Now.Year - Model.DateOfBirth.Value.Year)) yrs old)</span>
+                    }
+                    else
+                    {
+
+                        <span class="text-gray-400 italic font-normal">Not provided</span>
+                    }
+                </div>
+            </div>
+            <div class="flex items-start px-5 py-3.5">
+                <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">Gender</div>
+                <div class="text-sm font-medium text-gray-900">@(Model.Gender ?? "—")</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
+            Contact & Insurance
+        </div>
+        <div>
+            <div class="flex items-start px-5 py-3.5 border-b border-gray-100">
+                <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">Contact No.</div>
+                <div class="text-sm font-medium text-gray-900">
+                    @if (!string.IsNullOrEmpty(Model.ContactNo))
+                    {
+                        @Model.ContactNo
+                    }
+                    else
+                    {
+
+                        <span class="text-gray-400 italic font-normal">Not provided</span>
+                    }
+                </div>
+            </div>
+            <div class="flex items-start px-5 py-3.5 border-b border-gray-100">
+                <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">PhilHealth No.</div>
+                <div class="text-sm font-medium text-gray-900 font-mono">
+                    @if (!string.IsNullOrEmpty(Model.PhilhealthNo))
+                    {
+                        @Model.PhilhealthNo
+                    }
+                    else
+                    {
+
+                        <span class="text-gray-400 italic font-normal font-sans">Not provided</span>
+                    }
+                </div>
+            </div>
+            <div class="flex items-start px-5 py-3.5">
+                <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">Address</div>
+                <div class="text-sm font-medium text-gray-900">
+                    @if (!string.IsNullOrEmpty(Model.Address))
+                    {
+                        @Model.Address
+                    }
+                    else
+                    {
+
+                        <span class="text-gray-400 italic font-normal">Not provided</span>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Diagnosis -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
+        Diagnosis / Medical Notes
+    </div>
+    <div class="px-5 py-4 text-sm leading-relaxed text-gray-900">
+        @if (!string.IsNullOrEmpty(Model.Diagnosis))
+        {
+            @Model.Diagnosis
+        }
+        else
+        {
+
+            <span class="text-gray-400 italic">No diagnosis recorded.</span>
+        }
+    </div>
+</div>

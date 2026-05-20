@@ -1,0 +1,218 @@
+﻿@model MedlinkDialysisCenter.Models.PHRequirement
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+<style>
+    .ts-dropdown {
+    z-index: 9999 !important;
+    }
+</style>
+
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Add PhilHealth Record" : "Edit PhilHealth Record";
+    var isEdit = Model.Id != 0;
+}
+
+<!-- Header -->
+<div class="flex items-center gap-3.5 mb-6">
+    <a asp-action="Index"
+       class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+    </a>
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">@(isEdit ? "Edit PhilHealth Record" : "Add PhilHealth Record")</h1>
+        <p class="text-sm text-gray-500 mt-0.5">@(isEdit ? "Update requirement status" : "Fill in the PhilHealth requirements")</p>
+    </div>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    <form asp-action="@(isEdit ? "Edit" : "Create")">
+        <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm px-7 pt-4"></div>
+        @if (isEdit)
+        {
+            <input type="hidden" asp-for="Id" />
+        }
+        <input type="hidden" asp-for="CreatedAt" />
+
+        <!-- Patient & Category -->
+        <div class="px-7 py-6 border-b border-gray-100">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Patient Information</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Patient <span class="text-red-500">*</span></label>
+                    <select asp-for="PatientId" asp-items="ViewBag.Patients" id="patientSelect"
+                            class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-white cursor-pointer">
+                        <option value="">— Select Patient —</option>
+                    </select>
+                    <span asp-validation-for="PatientId" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Member Category <span class="text-red-500">*</span></label>
+                    <select asp-for="MemberCategory" id="categorySelect"
+                            class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-white cursor-pointer"
+                            onchange="updateRequirements()">
+                        <option value="">— Select Category —</option>
+                        <option value="Senior Citizen">Senior Citizen</option>
+                        <option value="Indigent">Indigent</option>
+                        <option value="Self-Employed">Self-Employed</option>
+                        <option value="Employed Government">Employed Government</option>
+                        <option value="Employed Private">Employed Private</option>
+                    </select>
+                    <span asp-validation-for="MemberCategory" class="text-xs text-red-500"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requirements -->
+        <div class="px-7 py-6 border-b border-gray-100">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Requirements</div>
+            <p class="text-xs text-gray-400 mb-5">Check all documents that have been submitted. Required fields depend on the member category.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+
+                <!-- Always required -->
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasCSF" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">CSF</div>
+                        <div class="text-xs text-gray-400">Coverage Support Form — <span class="text-blue-600 font-medium">All</span></div>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasCF2" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">CF2</div>
+                        <div class="text-xs text-gray-400">Claim Form 2 — <span class="text-blue-600 font-medium">All</span></div>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasMDR" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">MDR (Latest)</div>
+                        <div class="text-xs text-gray-400">Member Data Record — <span class="text-blue-600 font-medium">All</span></div>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasPhilhealthId" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">PhilHealth ID</div>
+                        <div class="text-xs text-gray-400">Required for most categories</div>
+                    </div>
+                </label>
+
+                <!-- Category-specific -->
+                <label id="row-receipt" class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50 opacity-40">
+                    <input asp-for="HasReceipt6Mos" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Receipt (6 mos)</div>
+                        <div class="text-xs text-gray-400">Self-Employed only — <span class="text-orange-500 font-medium">Self-Employed</span></div>
+                    </div>
+                </label>
+
+                <label id="row-cert" class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50 opacity-40">
+                    <input asp-for="HasCertMonthlyContrib" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">Cert. of Monthly Contribution</div>
+                        <div class="text-xs text-gray-400"><span class="text-purple-600 font-medium">Employed Gov't & Private</span> only</div>
+                    </div>
+                </label>
+
+                <label id="row-scid" class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50 opacity-40">
+                    <input asp-for="HasSCId" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">SC ID</div>
+                        <div class="text-xs text-gray-400"><span class="text-green-600 font-medium">Senior Citizen</span> only</div>
+                    </div>
+                </label>
+
+                <label id="row-employer" class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50 opacity-40">
+                    <input asp-for="HasCSFEmployerSig" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">CSF w/ Employer Signature</div>
+                        <div class="text-xs text-gray-400"><span class="text-purple-600 font-medium">Employed Gov't & Private</span> only</div>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasPDDRegistration" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">PDD Registration Form</div>
+                        <div class="text-xs text-gray-400">Dialysis registration — <span class="text-blue-600 font-medium">All</span></div>
+                    </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-4 rounded-xl border-[1.5px] border-gray-200 cursor-pointer hover:border-blue-400 hover:bg-blue-50/50 transition-all has-[:checked]:border-green-400 has-[:checked]:bg-green-50">
+                    <input asp-for="HasPhilhealthConsumption" type="checkbox" class="w-4 h-4 rounded accent-green-500" />
+                    <div>
+                        <div class="text-sm font-medium text-gray-800">PhilHealth Consumption</div>
+                        <div class="text-xs text-gray-400">Benefit usage record</div>
+                    </div>
+                </label>
+
+            </div>
+        </div>
+
+        <!-- Remarks -->
+        <div class="px-7 py-6">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Additional Notes</div>
+            <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-800">Remarks</label>
+                <textarea asp-for="Remarks" rows="3" placeholder="Any notes about missing documents or follow-ups..."
+                          class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition-all resize-y"></textarea>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-7 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-end gap-2.5">
+            <a asp-action="Index"
+               class="inline-flex items-center px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 no-underline hover:text-gray-800 hover:border-gray-400 transition-all">
+                Cancel
+            </a>
+            <button type="submit"
+                    class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm border-none cursor-pointer">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>
+                @(isEdit ? "Save Changes" : "Save Record")
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    new TomSelect('#patientSelect', {
+    placeholder: '— Search patient name —',
+    allowEmptyOption: true,
+    maxOptions: 200,
+    });
+
+    function updateRequirements() {
+    const cat = document.getElementById('categorySelect').value;
+    const rows = {
+    receipt: document.getElementById('row-receipt'),
+    cert: document.getElementById('row-cert'),
+    scid: document.getElementById('row-scid'),
+    employer: document.getElementById('row-employer'),
+    };
+
+    // Reset all category-specific rows to dimmed
+    Object.values(rows).forEach(r => r.classList.add('opacity-40'));
+
+    if (cat === 'Senior Citizen') { rows.scid.classList.remove('opacity-40'); }
+    if (cat === 'Self-Employed') { rows.receipt.classList.remove('opacity-40'); }
+    if (cat === 'Employed Government' || cat === 'Employed Private') {
+    rows.cert.classList.remove('opacity-40');
+    rows.employer.classList.remove('opacity-40');
+    }
+    // Indigent: no extra category-specific docs (PDD is now for all)
+    }
+
+    document.addEventListener('DOMContentLoaded', updateRequirements);
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

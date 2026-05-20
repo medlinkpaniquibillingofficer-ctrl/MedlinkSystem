@@ -1,0 +1,127 @@
+@model MedlinkDialysisCenter.Models.Patient
+
+@{
+    ViewData["Title"] = "Edit Patient";
+}
+
+<!-- Header -->
+<div class="flex items-center gap-3.5 mb-5">
+    <a asp-action="Index"
+       class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+    </a>
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">Edit Patient</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Update patient information</p>
+    </div>
+</div>
+
+<!-- Patient badge -->
+<div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-full px-3.5 py-1.5 text-sm font-medium mb-5">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+    Patient #@Model.PatientId.ToString("D4") — @Model.FullName
+</div>
+
+<!-- Form -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-red-600 text-sm px-7 pt-4"></div>
+        <input type="hidden" asp-for="PatientId" />
+        <input type="hidden" asp-for="CreatedAt" />
+
+        <!-- Personal Info -->
+        <div class="px-7 py-6 border-b border-gray-100">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Personal Information</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">First Name <span class="text-red-500">*</span></label>
+                    <input asp-for="FirstName" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="FirstName" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Middle Name</label>
+                    <input asp-for="MiddleName" placeholder="e.g. Cruz"
+                           class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="MiddleName" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Last Name <span class="text-red-500">*</span></label>
+                    <input asp-for="LastName" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="LastName" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Date of Birth</label>
+                    <input asp-for="DateOfBirth" type="date" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="DateOfBirth" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Gender</label>
+                    <select asp-for="Gender" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all bg-white cursor-pointer">
+                        <option value="">— Select —</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact & Insurance -->
+        <div class="px-7 py-6 border-b border-gray-100">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Contact & Insurance</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">Contact Number</label>
+                    <input asp-for="ContactNo" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="ContactNo" class="text-xs text-red-500"></span>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                    <label class="text-sm font-medium text-gray-800">PhilHealth No.</label>
+                    <input asp-for="PhilhealthNo" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="PhilhealthNo" class="text-xs text-red-500"></span>
+                </div>
+            </div>
+            <div class="mt-4 flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-800">Address</label>
+                <input asp-for="Address" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                <span asp-validation-for="Address" class="text-xs text-red-500"></span>
+            </div>
+        </div>
+
+        <!-- Medical Info -->
+        <div class="px-7 py-6">
+            <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Medical Information</div>
+            <div class="flex flex-col gap-1.5">
+                <label class="text-sm font-medium text-gray-800">Diagnosis</label>
+                <textarea asp-for="Diagnosis" rows="3" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all resize-y"></textarea>
+                <span asp-validation-for="Diagnosis" class="text-xs text-red-500"></span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="px-7 py-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
+            <a asp-action="Delete" asp-route-id="@Model.PatientId"
+               class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-red-50 border-[1.5px] border-red-200 text-red-600 text-sm font-medium no-underline hover:bg-red-600 hover:text-white hover:border-red-600 transition-all">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></svg>
+                Delete
+            </a>
+            <div class="flex items-center gap-2.5">
+                <a asp-action="Index"
+                   class="inline-flex items-center px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 no-underline hover:text-gray-800 hover:border-gray-400 transition-all">
+                    Cancel
+                </a>
+                <button type="submit"
+                        class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm border-none cursor-pointer">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
