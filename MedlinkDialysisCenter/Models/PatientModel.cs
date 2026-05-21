@@ -20,7 +20,7 @@ namespace MedlinkDialysisCenter.Models
         [MaxLength(10)]
         public string? Gender { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(12)]
         public string? PhilhealthNo { get; set; }
 
         [MaxLength(20)]

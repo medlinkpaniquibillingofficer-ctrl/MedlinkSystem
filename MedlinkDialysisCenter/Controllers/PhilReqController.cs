@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MedlinkDialysisCenter.Data;
+using MedlinkDialysisCenter.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MedlinkDialysisCenter.Data;
-using MedlinkDialysisCenter.Models;
 
 namespace MedlinkDialysisCenter.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class PhilhealthRequirementsController : Controller
     {
         private readonly AppDbContext _db;
@@ -20,7 +22,7 @@ namespace MedlinkDialysisCenter.Controllers
         {
             var records = await _db.PHRequirements
                 .Include(r => r.Patient)
-                .OrderBy(r => r.Patient.LastName)
+                .OrderBy(r => r.Patient.PatientId)
                 .ToListAsync();
             return View(records);
         }

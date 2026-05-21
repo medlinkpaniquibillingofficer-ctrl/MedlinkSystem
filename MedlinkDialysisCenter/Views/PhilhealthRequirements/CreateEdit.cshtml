@@ -4,7 +4,29 @@
 
 <style>
     .ts-dropdown {
-    z-index: 9999 !important;
+    z-index: 99999 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12) !important;
+    /* 🔥 ADD THIS */
+    background: white !important;
+    overflow: hidden;
+    }
+
+    .ts-dropdown .option {
+    padding: 10px 14px !important;
+    font-size: 14px !important;
+    color: #1f2937 !important;
+    /* 🔥 ADD THIS */
+    background-color: white !important;
+    }
+
+    .ts-dropdown .option:hover {
+    background-color: #f3f4f6 !important;
+    }
+
+    .ts-dropdown .option.active {
+    background: #eff6ff !important;
+    color: #2563eb !important;
     }
 </style>
 

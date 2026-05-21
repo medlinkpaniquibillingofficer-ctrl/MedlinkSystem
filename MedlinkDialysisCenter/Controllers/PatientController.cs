@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MedlinkDialysisCenter.Data;
+﻿using MedlinkDialysisCenter.Data;
 using MedlinkDialysisCenter.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedlinkDialysisCenter.Controllers
 {
+    [Authorize(Roles = "Admin,Nurse")]
     public class PatientsController : Controller
     {
         private readonly AppDbContext _db;
@@ -39,6 +41,9 @@ namespace MedlinkDialysisCenter.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.PhilhealthNo = patient.PhilhealthNo?.Replace(" ", "");
+                patient.ContactNo = patient.ContactNo?.Replace(" ", "");
+
                 patient.CreatedAt = DateTime.Now;
                 _db.Patients.Add(patient);
                 await _db.SaveChangesAsync();
@@ -64,6 +69,9 @@ namespace MedlinkDialysisCenter.Controllers
 
             if (ModelState.IsValid)
             {
+                patient.PhilhealthNo = patient.PhilhealthNo?.Replace(" ", "");
+                patient.ContactNo = patient.ContactNo?.Replace(" ", "");
+
                 _db.Patients.Update(patient);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

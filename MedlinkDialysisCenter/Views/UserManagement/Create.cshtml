@@ -1,0 +1,56 @@
+﻿@model MedlinkDialysisCenter.Models.CreateUserViewModel
+@{
+    ViewData["Title"] = "Add New User";
+}
+
+<h2>Add New User</h2>
+
+<div style="max-width:400px;">
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div style="background:#fee2e2; color:#b91c1c; padding:0.75rem;
+            border-radius:8px; margin-bottom:1rem;">
+            @foreach (var error in ViewData.ModelState.Values
+                .SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <form method="post" asp-action="Create">
+        <div style="margin-bottom:1rem;">
+            <label style="display:block; font-weight:600; margin-bottom:0.4rem;">Email</label>
+            <input asp-for="Email" type="email" placeholder="nurse@medlink.com"
+                   style="width:100%; padding:0.65rem; border:1px solid #d1d5db;
+            border-radius:8px;" />
+        </div>
+
+        <div style="margin-bottom:1rem;">
+            <label style="display:block; font-weight:600; margin-bottom:0.4rem;">Password</label>
+            <input asp-for="Password" type="password" placeholder="Min. 8 characters"
+                   style="width:100%; padding:0.65rem; border:1px solid #d1d5db;
+            border-radius:8px;" />
+        </div>
+
+        <div style="margin-bottom:1.5rem;">
+            <label style="display:block; font-weight:600; margin-bottom:0.4rem;">Role</label>
+            <select asp-for="Role"
+                    style="width:100%; padding:0.65rem; border:1px solid #d1d5db;
+                border-radius:8px;">
+                <option value="">-- Select Role --</option>
+                <option value="Admin">Admin</option>
+                <option value="Nurse">Nurse</option>
+            </select>
+        </div>
+
+        <button type="submit"
+                style="background:#1a56db; color:white; border:none;
+            padding:0.75rem 1.5rem; border-radius:8px;
+            font-size:1rem; cursor:pointer;">
+            Create User
+        </button>
+        <a href="/UserManagement/Index"
+           style="margin-left:1rem; color:#6b7280;">Cancel</a>
+    </form>
+</div>

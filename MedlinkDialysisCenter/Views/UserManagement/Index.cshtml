@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h2>User Management</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div style="background:#d1fae5; color:#065f46; padding:0.75rem;
+        border-radius:8px; margin-bottom:1rem;">
+        @TempData["Success"]
+    </div>
+}
+
+<a href="/UserManagement/Create"
+   style="background:#1a56db; color:white; padding:0.5rem 1rem;
+    border-radius:8px; text-decoration:none; display:inline-block;
+    margin-bottom:1rem;">
+    + Add New User
+</a>
+
+<table style="width:100%; border-collapse:collapse;">
+    <thead style="background:#f3f4f6;">
+        <tr>
+            <th style="padding:0.75rem; text-align:left; border:1px solid #e5e7eb;">Email</th>
+            <th style="padding:0.75rem; text-align:left; border:1px solid #e5e7eb;">Role</th>
+            <th style="padding:0.75rem; text-align:left; border:1px solid #e5e7eb;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td style="padding:0.75rem; border:1px solid #e5e7eb;">@user.Email</td>
+                <td style="padding:0.75rem; border:1px solid #e5e7eb;">
+                    @(((Dictionary<string, string>)ViewBag.UserRoles)[user.Id])
+                </td>
+                <td style="padding:0.75rem; border:1px solid #e5e7eb;">
+                    <form method="post" asp-action="Delete" asp-route-id="@user.Id"
+                          onsubmit="return confirm('Delete this user?')">
+                        <button type="submit"
+                                style="background:#ef4444; color:white; border:none;
+                            padding:0.4rem 0.75rem; border-radius:6px; cursor:pointer;">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

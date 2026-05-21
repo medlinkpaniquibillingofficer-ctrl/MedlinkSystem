@@ -33,7 +33,6 @@ namespace MedlinkDialysisCenter.Migrations
                     HasPDDRegistration = table.Column<bool>(type: "bit", nullable: false),
                     HasPhilhealthConsumption = table.Column<bool>(type: "bit", nullable: false),
                     Remarks = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    CPNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -67,7 +66,6 @@ namespace MedlinkDialysisCenter.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PatientId = table.Column<int>(type: "int", nullable: false),
-                    CPNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HasCF2 = table.Column<bool>(type: "bit", nullable: false),
                     HasCSF = table.Column<bool>(type: "bit", nullable: false),
