@@ -3,6 +3,13 @@
   "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Downloads\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -51,10 +58,6 @@
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\dbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260521013346_AddIdentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:MedlinkDialysisCenter\\Migrations\\20260521013346_AddIdentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\medlinkdialysiscenter.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\medlinkdialysiscenter.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -81,10 +84,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\models\\philreqmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\models\\philreqmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\models\\patientmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\migrations\\20260520004435_addphilhealthrequirements.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -115,10 +114,6 @@
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\views\\patients\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\views\\philhealthrequirements\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\views\\philhealthrequirements\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -139,9 +134,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Downloads\\CreateEdit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Downloads\\Index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\Downloads\\PhilhealthRequirementsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -199,6 +191,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\migrations\\20260520045131_changemaxlengthofphno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\migrations\\20260520045131_changemaxlengthofphno.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|c:\\users\\admin\\source\\repos\\medlinkdialysiscenter\\medlinkdialysiscenter\\migrations\\20260521013346_addidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A34C70C7-6CE3-7865-B838-31C3918D4D0F}|MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj|solutionrelative:medlinkdialysiscenter\\migrations\\20260521013346_addidentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -208,63 +204,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\UserViewModel.cs",
-              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Models\\UserViewModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\UserViewModel.cs",
-              "RelativeToolTip": "MedlinkDialysisCenter\\Models\\UserViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T03:10:21.097Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PhilReqController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
-              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
-              "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T00:38:45.18Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PatientController.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PatientController.cs",
-              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\PatientController.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PatientController.cs",
-              "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\PatientController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T07:48:04.125Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAM4AAAAAAAAAAAAmwNkAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAmwNkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-05-19T07:25:52.855Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\HomeController.cs",
@@ -272,12 +229,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T07:24:55.33Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T07:24:55.33Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "PhilReqModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\PhilReqModel.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Models\\PhilReqModel.cs",
@@ -285,12 +241,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Models\\PhilReqModel.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAwwBMAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T00:36:53.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:36:53.802Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "UserManagementController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\UserManagementController.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\UserManagementController.cs",
@@ -298,12 +253,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\UserManagementController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T03:10:55.117Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T03:10:55.117Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\UserManagement\\Index.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\UserManagement\\Index.cshtml",
@@ -311,12 +265,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\UserManagement\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-21T03:12:02.171Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T03:12:02.171Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\UserManagement\\Create.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\UserManagement\\Create.cshtml",
@@ -324,8 +277,69 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\UserManagement\\Create.cshtml",
               "ViewState": "AgIAABUAAAAAAAAAAAAAACMAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-21T03:12:28.69Z",
+              "WhenOpened": "2026-05-21T03:12:28.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAIgAAAAAAAAAAIAwwI8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-20T00:13:19.179Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Index.cshtml",
+              "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\Downloads\\Index.cshtml",
+              "RelativeToolTip": "..\\..\\..\\Downloads\\Index.cshtml",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAwwLsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-21T07:07:02.276Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PatientController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PatientController.cs",
+              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\PatientController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PatientController.cs",
+              "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\PatientController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-19T07:48:04.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PhilReqController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
+              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
+              "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\PhilReqController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-20T00:38:45.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\UserViewModel.cs",
+              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Models\\UserViewModel.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\UserViewModel.cs",
+              "RelativeToolTip": "MedlinkDialysisCenter\\Models\\UserViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-21T03:10:21.097Z"
             },
             {
               "$type": "Document",
@@ -337,12 +351,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520004435_AddPhilhealthRequirements.Designer.cs",
               "ViewState": "AgIAAEMAAAAAAAAAAAAAAFYAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T00:26:09.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T00:26:09.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Program.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Program.cs",
@@ -350,12 +363,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Program.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-19T04:28:27.079Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T04:28:27.079Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 50,
               "Title": "20260521013346_AddIdentity.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260521013346_AddIdentity.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260521013346_AddIdentity.cs",
@@ -363,12 +375,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260521013346_AddIdentity.cs",
               "ViewState": "AgIAAMQAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T01:33:46.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T01:33:46.389Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Controllers\\AccountController.cs",
@@ -376,12 +387,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Controllers\\AccountController.cs",
               "ViewState": "AgIAAC8AAAAAAAAAAAAwwBEAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T01:42:30.877Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T01:42:30.877Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Account\\Login.cshtml",
@@ -389,25 +399,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\Account\\Login.cshtml",
               "ViewState": "AgIAAGAAAAAAAAAAAAAAAH4AAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-21T01:43:25.619Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T01:43:25.619Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "PatientModel.cs",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\PatientModel.cs",
-              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Models\\PatientModel.cs",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\PatientModel.cs",
-              "RelativeToolTip": "MedlinkDialysisCenter\\Models\\PatientModel.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAowBoAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T04:41:58.469Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "DBSeeder.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\DBSeeder.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\DBSeeder.cs",
@@ -415,12 +411,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\DBSeeder.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAgwBsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T01:36:52.336Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T01:36:52.336Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "20260520040340_Removecpnumber.Designer.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.Designer.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.Designer.cs",
@@ -428,12 +423,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.Designer.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAAAA4AAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T00:26:32.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T00:26:32.662Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "MedlinkDialysisCenter.csproj",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
@@ -441,12 +435,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-05-19T04:24:57.713Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-19T04:24:57.713Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Data\\AppDbContext.cs",
@@ -454,12 +447,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T00:55:35.977Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:55:35.977Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "20260520040340_Removecpnumber.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.cs",
@@ -467,8 +459,7 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520040340_Removecpnumber.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T04:03:40.593Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T04:03:40.593Z"
             },
             {
               "$type": "Document",
@@ -480,12 +471,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520004435_AddPhilhealthRequirements.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAABqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T00:44:35.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:44:35.733Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "additional-methods.js",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
@@ -493,12 +483,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
               "ViewState": "AgIAAHEDAAAAAAAAAAAmwIEDAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-05-21T00:27:56.522Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T00:27:56.522Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\Index.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\Index.cshtml",
@@ -506,8 +495,7 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\Index.cshtml",
               "ViewState": "AgIAACEAAAAAAAAAAAAAADQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-20T00:42:48.991Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:42:48.991Z"
             },
             {
               "$type": "Document",
@@ -519,8 +507,7 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520005858_AddPHRequirements.cs",
               "ViewState": "AgIAADEAAAAAAAAAAAAjwEMAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-20T00:58:58.585Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:58:58.585Z"
             },
             {
               "$type": "Document",
@@ -532,8 +519,7 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Migrations\\20260520005858_AddPHRequirements.Designer.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAAACEAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-05-21T00:26:24.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-21T00:26:24.112Z"
             },
             {
               "$type": "Document",
@@ -545,12 +531,11 @@
               "RelativeToolTip": "MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\CreateEdit.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-20T00:43:31.507Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-05-20T00:43:31.507Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 29,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\appsettings.json",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\appsettings.json",
@@ -574,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 49,
               "Title": "20260520045131_ChangeMaxlengthofPHNO.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260520045131_ChangeMaxlengthofPHNO.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260520045131_ChangeMaxlengthofPHNO.cs",
@@ -598,7 +583,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 28,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\Delete.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\PhilhealthRequirements\\Delete.cshtml",
@@ -610,19 +595,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "MedlinkDialysisCenter\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-20T00:13:19.179Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 30,
               "Title": "AppDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\AppDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\AppDbContextModelSnapshot.cs",
@@ -634,7 +607,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 31,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Patients\\Edit.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Patients\\Edit.cshtml",
@@ -646,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 32,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Create.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Create.cshtml",
@@ -658,7 +631,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 35,
               "Title": "PhilhealthRequirement.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\PhilhealthRequirement.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\PhilhealthRequirement.cs",
@@ -670,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 33,
               "Title": "CreateEdit.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\CreateEdit.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\CreateEdit.cshtml",
@@ -682,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 48,
               "Title": "20260520000158_AddMiddleNameToPatient.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260520000158_AddMiddleNameToPatient.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260520000158_AddMiddleNameToPatient.cs",
@@ -694,19 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Index.cshtml",
-              "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Index.cshtml",
-              "ToolTip": "C:\\Users\\ADMIN\\Downloads\\Index.cshtml",
-              "RelativeToolTip": "..\\..\\..\\Downloads\\Index.cshtml",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAQwMIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-05-20T00:19:09.99Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 34,
               "Title": "PhilhealthRequirementsController.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\PhilhealthRequirementsController.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\PhilhealthRequirementsController.cs",
@@ -718,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 41,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Edit.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Edit.cshtml",
@@ -730,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 40,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Details.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Details.cshtml",
@@ -742,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 42,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\_Layout.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\_Layout.cshtml",
@@ -754,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 36,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Patients\\Index.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Patients\\Index.cshtml",
@@ -766,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 39,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Delete.cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Delete.cshtml",
@@ -778,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 37,
               "Title": "Index (1).cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\Downloads\\Index (1).cshtml",
               "RelativeDocumentMoniker": "..\\..\\..\\Downloads\\Index (1).cshtml",
@@ -790,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 38,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Patients\\Delete.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Patients\\Delete.cshtml",
@@ -802,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 44,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\_ViewStart.cshtml",
@@ -814,7 +775,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 43,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -826,7 +787,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 45,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Views\\_ViewImports.cshtml",
@@ -838,7 +799,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 46,
               "Title": "20260519045313_InitialCreate.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Migrations\\20260519045313_InitialCreate.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Migrations\\20260519045313_InitialCreate.cs",
@@ -850,7 +811,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 47,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "MedlinkDialysisCenter\\Models\\ErrorViewModel.cs",
