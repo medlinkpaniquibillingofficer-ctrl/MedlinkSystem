@@ -110,6 +110,7 @@
             <table class="w-full text-sm" id="trackerTable">
                 <thead>
                     <tr class="border-b border-gray-100 bg-gray-50">
+                        <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-4 py-3 whitespace-nowrap sticky left-0 bg-gray-50 z-10">Patient ID</th>
                         <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-4 py-3 whitespace-nowrap sticky left-0 bg-gray-50 z-10">Patient Name</th>
                         <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-4 py-3 whitespace-nowrap">Category</th>
                         <th class="text-center text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-3 py-3 whitespace-nowrap">CSF</th>
@@ -132,6 +133,10 @@
                         <tr class="border-b border-gray-100 last:border-0 hover:bg-slate-50 transition-colors"
                             data-category="@r.MemberCategory"
                             data-status="@(r.IsComplete ? "complete" : "incomplete")">
+
+                            <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap sticky left-0 bg-white hover:bg-slate-50">
+                                @r.Patient.PatientId
+                            </td>
 
                             <!-- Patient Name -->
                             <td class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap sticky left-0 bg-white hover:bg-slate-50">

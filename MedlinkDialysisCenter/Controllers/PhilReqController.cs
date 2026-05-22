@@ -22,7 +22,7 @@ namespace MedlinkDialysisCenter.Controllers
         {
             var records = await _db.PHRequirements
                 .Include(r => r.Patient)
-                .OrderBy(r => r.Patient.PatientId)
+                .OrderByDescending(r => r.Patient.PatientId)
                 .ToListAsync();
             return View(records);
         }

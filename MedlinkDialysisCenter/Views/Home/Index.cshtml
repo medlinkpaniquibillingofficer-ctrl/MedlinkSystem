@@ -83,16 +83,51 @@
         </div>
     </div>
 
-    <div class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm flex items-start justify-between hover:shadow-md transition-shadow">
+    <a asp-controller="Patients"
+       asp-action="Celebrants"
+       class="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm flex items-start justify-between hover:shadow-md transition-all hover:border-yellow-300 no-underline">
+
         <div>
-            <div class="text-sm text-gray-500 font-medium mb-2">Center Status</div>
-            <div class="text-xl font-semibold text-purple-600 pt-1.5">Operational</div>
-            <div class="text-xs text-gray-400 mt-2">All systems running</div>
+            <div class="text-sm text-gray-500 font-medium mb-2">
+                Birthday
+            </div>
+
+            @{
+                var birthdayThisMonth = _db.Patients
+                    .Count(p => p.DateOfBirth.HasValue &&
+                                p.DateOfBirth.Value.Month == today.Month);
+            }
+
+            @if (birthdayThisMonth > 0)
+            {
+                <div class="text-xl font-semibold text-yellow-600 pt-1.5">
+                    @DateTime.Now.ToString("MMMM") Celebrants 🎂
+                </div>
+
+                <div class="text-xs text-gray-400 mt-2">
+                    @birthdayThisMonth celebrant@(birthdayThisMonth > 1 ? "s" : "")
+                </div>
+            }
+            else
+            {
+                <div class="text-xl font-semibold text-gray-500 pt-1.5">
+                    No Celebrants
+                </div>
+
+                <div class="text-xs text-gray-400 mt-2">
+                    No birthdays this month
+                </div>
+            }
+
         </div>
-        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12" /></svg>
+
+        <div class="w-10 h-10 rounded-xl bg-yellow-50 text-yellow-600 flex items-center justify-center flex-shrink-0">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C10 5 7 7 7 11a5 5 0 0 0 10 0c0-4-3-6-5-9z" />
+                <path d="M12 13v8" />
+            </svg>
         </div>
-    </div>
+    </a>
 
 </div>
 

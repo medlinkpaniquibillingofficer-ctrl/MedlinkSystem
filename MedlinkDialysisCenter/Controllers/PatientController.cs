@@ -100,5 +100,17 @@ namespace MedlinkDialysisCenter.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Celebrants(){
+            var currentMonth = DateTime.Now.Month;
+
+            var celebrants = _db.Patients
+                .Where(p => p.DateOfBirth.HasValue &&
+                            p.DateOfBirth.Value.Month == currentMonth)
+                .OrderBy(p => p.DateOfBirth.Value.Day)
+                .ToList();
+
+            return View(celebrants);
+        }
     }
 }

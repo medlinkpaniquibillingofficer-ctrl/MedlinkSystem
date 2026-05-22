@@ -1,0 +1,68 @@
+﻿@model List<Patient>
+
+@{
+    ViewData["Title"] = "Celebrants";
+}
+
+<div class="max-w-5xl mx-auto">
+
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">
+            🎂 Birthday Celebrants
+        </h1>
+
+        <p class="text-gray-500 mt-1">
+            Patients celebrating birthdays this month.
+        </p>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+
+        @if (!Model.Any())
+        {
+            <div class="p-10 text-center text-gray-400">
+                No birthday celebrants this month.
+            </div>
+        }
+        else
+        {
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                        <th class="text-left px-6 py-4 text-sm font-semibold text-gray-600">Patient</th>
+                        <th class="text-left px-6 py-4 text-sm font-semibold text-gray-600">Birthday</th>
+                        <th class="text-left px-6 py-4 text-sm font-semibold text-gray-600">Age</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var patient in Model)
+                    {
+                        var age = DateTime.Now.Year - patient.DateOfBirth.Value.Year;
+
+                        <tr class="border-b border-gray-100 hover:bg-yellow-50 transition-colors">
+                            <td class="px-6 py-4">
+                                <div class="font-medium text-gray-800">
+                                    🎉 @patient.FullName
+                                </div>
+
+                                <div class="text-xs text-gray-400">
+                                    #@patient.PatientId.ToString("D4")
+                                </div>
+                            </td>
+
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                @patient.DateOfBirth.Value.ToString("MMMM dd, yyyy")
+                            </td>
+
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                @age years old
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+    </div>
+</div>
