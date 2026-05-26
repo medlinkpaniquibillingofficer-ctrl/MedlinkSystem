@@ -3,7 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedlinkDialysisCenter.Models
 {
-    public class Patient {
+    public class Patient
+    {
         public int PatientId { get; set; }
 
         [Required, MaxLength(100)]
@@ -31,6 +32,9 @@ namespace MedlinkDialysisCenter.Models
 
         [MaxLength(200)]
         public string? Diagnosis { get; set; }
+
+        [MaxLength(200)]
+        public string? Nephrologist { get; set; } 
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 

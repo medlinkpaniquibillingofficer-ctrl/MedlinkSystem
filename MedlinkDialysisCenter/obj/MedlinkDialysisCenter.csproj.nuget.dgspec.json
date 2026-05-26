@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj": {}
+    "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj": {
+    "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
         "projectName": "MedlinkDialysisCenter",
-        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
+        "projectPath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

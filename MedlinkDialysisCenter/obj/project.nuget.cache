@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FpaRADhKWPE=",
+  "dgSpecHash": "qOXtk3htR+c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkDialysisCenter\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
+  "projectFilePath": "C:\\Users\\ADMIN\\source\\repos\\MedlinkSystem\\MedlinkDialysisCenter\\MedlinkDialysisCenter.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

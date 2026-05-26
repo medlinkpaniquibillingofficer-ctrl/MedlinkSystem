@@ -60,7 +60,7 @@
                     <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-5 py-3 hidden md:table-cell">PhilHealth No.</th>
                     <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-5 py-3 hidden md:table-cell">Contact</th>
                     <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-5 py-3 hidden lg:table-cell">Diagnosis</th>
-                    <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-5 py-3 hidden lg:table-cell">Registered</th>
+                    <th class="text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 px-5 py-3 hidden lg:table-cell">Nephrologist</th>
                     <th class="px-5 py-3"></th>
                 </tr>
             </thead>
@@ -98,7 +98,7 @@
                         </td>
                         <td class="px-5 py-4 text-sm text-gray-600 hidden md:table-cell">@(patient.ContactNo ?? "—")</td>
                         <td class="px-5 py-4 text-sm text-gray-600 hidden lg:table-cell">@(patient.Diagnosis ?? "—")</td>
-                        <td class="px-5 py-4 text-sm text-gray-400 hidden lg:table-cell">@patient.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td class="px-5 py-4 text-sm text-gray-600 hidden lg:table-cell">@(patient.Nephrologist ?? "—")</td>
                         <td class="px-5 py-4">
                             <div class="flex items-center gap-1.5">
                                 <a asp-action="Details" asp-route-id="@patient.PatientId"

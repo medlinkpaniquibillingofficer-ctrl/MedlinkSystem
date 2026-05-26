@@ -131,20 +131,32 @@
     </div>
 </div>
 
-<!-- Diagnosis -->
+<!-- Diagnosis & Nephrologist -->
 <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
     <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
         Diagnosis / Medical Notes
     </div>
-    <div class="px-5 py-4 text-sm leading-relaxed text-gray-900">
+    <div class="px-5 py-4 text-sm leading-relaxed text-gray-900 border-b border-gray-100">
         @if (!string.IsNullOrEmpty(Model.Diagnosis))
         {
             @Model.Diagnosis
         }
         else
         {
-
             <span class="text-gray-400 italic">No diagnosis recorded.</span>
         }
+    </div>
+    <div class="flex items-start px-5 py-3.5">
+        <div class="text-sm text-gray-500 w-32 flex-shrink-0 pt-0.5">Nephrologist</div>
+        <div class="text-sm font-medium text-gray-900">
+            @if (!string.IsNullOrEmpty(Model.Nephrologist))
+            {
+                @Model.Nephrologist
+            }
+            else
+            {
+                <span class="text-gray-400 italic font-normal">Not assigned</span>
+            }
+        </div>
     </div>
 </div>
