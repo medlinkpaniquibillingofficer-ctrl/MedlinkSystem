@@ -10,11 +10,24 @@
         <h1 class="text-2xl font-semibold tracking-tight m-0">PhilHealth Tracker</h1>
         <p class="text-sm text-gray-500 mt-1">Monitor patient requirements for PhilHealth coverage</p>
     </div>
-    <a asp-action="Create"
-       class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
-        Add Record
-    </a>
+    <div class="flex items-center gap-2">
+        <!-- Export Button -->
+        <a asp-action="ExportPhilHealthToExcel"
+           class="inline-flex items-center gap-1.5 bg-white text-gray-700 text-sm font-medium px-4 py-2.5 rounded-xl no-underline border-[1.5px] border-gray-200 hover:border-green-500 hover:text-green-600 hover:bg-green-50 transition-all shadow-sm">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Export to Excel
+        </a>
+        <!-- Add Record Button -->
+        <a asp-action="Create"
+           class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            Add Record
+        </a>
+    </div>
 </div>
 
 @if (TempData["Success"] != null)
@@ -212,7 +225,7 @@
         const status = document.getElementById('statusFilter').value;
 
         document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
-            const name = row.cells[0].textContent.toLowerCase();
+            const name = row.cells[1].textContent.toLowerCase();
             const rowCat = row.dataset.category ?? '';
             const rowStatus = row.dataset.status ?? '';
 
