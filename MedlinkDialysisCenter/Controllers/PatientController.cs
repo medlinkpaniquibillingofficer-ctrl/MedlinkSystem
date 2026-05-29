@@ -45,8 +45,8 @@ namespace MedlinkDialysisCenter.Controllers
             {
                 patient.PhilhealthNo = patient.PhilhealthNo?.Replace(" ", "");
                 patient.ContactNo = patient.ContactNo?.Replace(" ", "");
-
                 patient.CreatedAt = DateTime.Now;
+
                 _db.Patients.Add(patient);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

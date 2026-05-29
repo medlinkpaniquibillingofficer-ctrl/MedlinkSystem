@@ -19,7 +19,7 @@
 <!-- Patient badge -->
 <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-700 rounded-full px-3.5 py-1.5 text-sm font-medium mb-5">
     <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-    Patient #@Model.PatientId.ToString("D4") — @Model.FullName
+    Patient #@Model.PatientCode — @Model.FullName
 </div>
 
 <!-- Form -->
@@ -33,6 +33,13 @@
         <div class="px-7 py-6 border-b border-gray-100">
             <div class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider mb-5">Personal Information</div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex flex-col gap-1.5 md:col-span-2">
+                    <label class="text-sm font-medium text-gray-800">Patient Code</label>
+                    <input asp-for="PatientCode"
+                           placeholder="e.g. 001"
+                           class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />
+                    <span asp-validation-for="PatientCode" class="text-xs text-red-500"></span>
+                </div>
                 <div class="flex flex-col gap-1.5">
                     <label class="text-sm font-medium text-gray-800">First Name <span class="text-red-500">*</span></label>
                     <input asp-for="FirstName" class="px-3 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 transition-all" />

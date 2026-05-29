@@ -7,6 +7,9 @@ namespace MedlinkDialysisCenter.Models
     {
         public int PatientId { get; set; }
 
+        [MaxLength(20)]
+        public string PatientCode { get; set; } = string.Empty; // ADD THIS
+
         [Required, MaxLength(100)]
         public string FirstName { get; set; } = string.Empty;
 
@@ -33,12 +36,12 @@ namespace MedlinkDialysisCenter.Models
         [MaxLength(200)]
         public string? Diagnosis { get; set; }
 
-        //[MaxLength(200)]
-        //public string? Nephrologist { get; set; } 
+        [MaxLength(200)]
+        public string? Nephrologist { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         [NotMapped]
-        public string FullName => $"{FirstName} {MiddleName} {LastName}";
+        public string FullName => $"{FirstName} {MiddleName} {LastName}".Trim();
     }
 }

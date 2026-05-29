@@ -44,10 +44,10 @@
             <div class="flex flex-wrap gap-1.5 mb-2">
                 @foreach (var p in birthdayPatients)
                 {
-                    <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.PatientId"
+                    <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.PatientCode"
                        class="inline-flex items-center gap-1.5 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-full px-3 py-1 text-xs font-semibold no-underline hover:bg-yellow-200 transition-colors">
                         🎁 @p.FullName
-                        <span class="text-yellow-500 font-normal">#@p.PatientId.ToString("D4")</span>
+                        <span class="text-yellow-500 font-normal">#@p.PatientCode</span>
                     </a>
                 }
             </div>
@@ -150,7 +150,7 @@
             {
                 var isBirthday = p.DateOfBirth.HasValue && p.DateOfBirth.Value.Month == today.Month && p.DateOfBirth.Value.Day == today.Day;
 
-                <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.PatientId"
+                <a asp-controller="Patients" asp-action="Details" asp-route-id="@p.PatientCode"
                    class="flex items-center gap-3 px-5 py-3.5 border-b border-gray-100 last:border-0 hover:bg-slate-50 no-underline text-inherit transition-colors @(isBirthday ? "bg-yellow-50 hover:bg-yellow-100" : "")">
                     <div class="w-9 h-9 rounded-full @(isBirthday ? "bg-yellow-100 text-yellow-700" : "bg-blue-50 text-blue-600") flex items-center justify-center text-xs font-semibold flex-shrink-0">
                         @if (isBirthday)
@@ -171,7 +171,7 @@
                                 <span class="text-xs bg-yellow-100 border border-yellow-300 text-yellow-700 rounded-full px-2 py-0.5 font-medium">🎁 Birthday</span>
                             }
                         </div>
-                        <div class="text-xs text-gray-400 font-mono">#@p.PatientId.ToString("D4")</div>
+                        <div class="text-xs text-gray-400 font-mono">#@p.PatientCode</div>
                     </div>
                     <div class="text-xs text-gray-400 ml-auto">@p.CreatedAt.ToString("MMM dd")</div>
                 </a>
