@@ -33,7 +33,7 @@ namespace MedlinkDialysisCenter.Models
         [MaxLength(200)]
         public string? Diagnosis { get; set; }
 
-        [MaxLength(200)]
+        //[MaxLength(200)]
         //public string? Nephrologist { get; set; } 
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
