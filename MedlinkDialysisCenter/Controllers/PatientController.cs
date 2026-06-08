@@ -21,7 +21,7 @@ namespace MedlinkDialysisCenter.Controllers
         // GET: /Patients
         public async Task<IActionResult> Index()
         {
-            var patients = await _db.Patients.OrderByDescending(p => p.CreatedAt).ToListAsync();
+            var patients = await _db.Patients.OrderByDescending(p => p.PatientCode).ToListAsync();
             return View(patients);
         }
 
