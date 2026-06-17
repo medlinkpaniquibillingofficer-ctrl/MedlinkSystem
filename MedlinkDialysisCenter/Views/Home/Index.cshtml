@@ -8,7 +8,7 @@
 @{
     var today = DateTime.Today;
 
-    var totalPatients = _db.Patients.Count();
+    var totalPatients = _db.Patients.Where(p => !p.IsDeleted).Count();
     var newThisMonth = _db.Patients.Count(p => p.CreatedAt.Month == DateTime.Now.Month && p.CreatedAt.Year == DateTime.Now.Year);
     var recentPatients = _db.Patients.OrderByDescending(p => p.CreatedAt).Take(5).ToList();
 

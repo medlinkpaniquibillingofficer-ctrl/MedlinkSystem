@@ -40,6 +40,8 @@ namespace MedlinkDialysisCenter.Models
         public string? Nephrologist { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public bool IsDeleted { get; set; }
+        public DateTime? DeletedAt { get; set; }
 
         [NotMapped]
         public string FullName => $"{FirstName} {MiddleName} {LastName}".Trim();

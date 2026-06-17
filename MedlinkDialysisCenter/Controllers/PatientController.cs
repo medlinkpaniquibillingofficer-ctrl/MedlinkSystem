@@ -21,7 +21,10 @@ namespace MedlinkDialysisCenter.Controllers
         // GET: /Patients
         public async Task<IActionResult> Index()
         {
-            var patients = await _db.Patients.OrderByDescending(p => p.PatientCode).ToListAsync();
+            var patients = await _db.Patients
+                .Where(p => !p.IsDeleted)
+                .OrderByDescending(p => p.PatientCode)
+                .ToListAsync();
             return View(patients);
         }
 
@@ -97,17 +100,42 @@ namespace MedlinkDialysisCenter.Controllers
             var patient = await _db.Patients.FindAsync(id);
             if (patient != null)
             {
-                _db.Patients.Remove(patient);
+                patient.IsDeleted = true;
+                patient.DeletedAt = DateTime.Now;
                 await _db.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Celebrants(){
+        // GET: /Patients/Cancelled
+        public async Task<IActionResult> Cancelled(){
+            var patients = await _db.Patients
+                .Where(p => p.IsDeleted)
+                .OrderByDescending(p => p.DeletedAt)
+                .ToListAsync();
+            return View(patients);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Restore(int id)
+        {
+            var patient = await _db.Patients.FindAsync(id);
+            if (patient != null)
+            {
+                patient.IsDeleted = false;
+                patient.DeletedAt = null;
+                await _db.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Celebrants()
+        {
             var currentMonth = DateTime.Now.Month;
 
             var celebrants = _db.Patients
-                .Where(p => p.DateOfBirth.HasValue &&
+                .Where(p => !p.IsDeleted && p.DateOfBirth.HasValue &&
                             p.DateOfBirth.Value.Month == currentMonth)
                 .OrderBy(p => p.DateOfBirth.Value.Day)
                 .ToList();
@@ -117,7 +145,7 @@ namespace MedlinkDialysisCenter.Controllers
 
         public IActionResult ExportToExcel()
         {
-            var patients = _db.Patients.ToList(); // or however you fetch patients
+            var patients = _db.Patients.Where(p => !p.IsDeleted).ToList(); // or however you fetch patients
 
             using var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Patients");

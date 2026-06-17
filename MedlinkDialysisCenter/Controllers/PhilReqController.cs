@@ -24,6 +24,7 @@ namespace MedlinkDialysisCenter.Controllers
         {
             var records = await _db.PHRequirements
                 .Include(r => r.Patient)
+                .Where(r => !r.Patient.IsDeleted)
                 .OrderByDescending(r => r.Patient.PatientCode)
                 .ToListAsync();
             return View(records);
@@ -33,6 +34,7 @@ namespace MedlinkDialysisCenter.Controllers
         public IActionResult Create()
         {
             ViewBag.Patients = _db.Patients
+                .Where(p => !p.IsDeleted)
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
                 .Select(p => new SelectListItem
@@ -50,7 +52,8 @@ namespace MedlinkDialysisCenter.Controllers
         // POST: /PhilhealthRequirements/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PHRequirement model){
+        public async Task<IActionResult> Create(PHRequirement model)
+        {
             if (ModelState.IsValid)
             {
                 try
@@ -68,6 +71,7 @@ namespace MedlinkDialysisCenter.Controllers
                 }
             }
             ViewBag.Patients = _db.Patients
+                .Where(p => !p.IsDeleted)
                 .OrderBy(p => p.LastName)
                 .ThenBy(p => p.FirstName)
                 .Select(p => new SelectListItem
@@ -86,7 +90,9 @@ namespace MedlinkDialysisCenter.Controllers
         {
             var record = await _db.PHRequirements.FindAsync(id);
             if (record == null) return NotFound();
-            ViewBag.Patients = new SelectList(_db.Patients.OrderBy(p => p.LastName), "PatientId", "FullName", record.PatientId);
+            ViewBag.Patients = new SelectList(
+                _db.Patients.Where(p => !p.IsDeleted || p.PatientId == record.PatientId).OrderBy(p => p.LastName),
+                "PatientId", "FullName", record.PatientId);
             return View("CreateEdit", record);
         }
 
@@ -112,7 +118,9 @@ namespace MedlinkDialysisCenter.Controllers
                     TempData["Error"] = "An error occurred while updating the record. Please try again.";
                 }
             }
-            ViewBag.Patients = new SelectList(_db.Patients.OrderBy(p => p.LastName), "PatientId", "FullName", model.PatientId);
+            ViewBag.Patients = new SelectList(
+                _db.Patients.Where(p => !p.IsDeleted || p.PatientId == model.PatientId).OrderBy(p => p.LastName),
+                "PatientId", "FullName", model.PatientId);
             return View("CreateEdit", model);
         }
 
@@ -140,9 +148,13 @@ namespace MedlinkDialysisCenter.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult ExportPhilHealthToExcel(){
+        public IActionResult ExportPhilHealthToExcel()
+        {
 
-            var records = _db.PHRequirements.Include(r => r.Patient).ToList();
+            var records = _db.PHRequirements
+                .Include(r => r.Patient)
+                .Where(r => !r.Patient.IsDeleted)
+                .ToList();
 
             using var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("PhilHealth Tracker");

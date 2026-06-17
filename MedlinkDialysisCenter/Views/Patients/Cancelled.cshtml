@@ -1,0 +1,66 @@
+﻿@model List<MedlinkDialysisCenter.Models.Patient>
+
+@{
+    ViewData["Title"] = "Cancelled Patients";
+}
+
+<!-- Header -->
+<div class="flex items-center gap-3.5 mb-7">
+    <a asp-action="Index"
+       class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+    </a>
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">Cancelled Patients</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Records are kept and can be restored anytime</p>
+    </div>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    @if (!Model.Any())
+    {
+        <div class="px-6 py-14 text-center text-sm text-gray-400">No cancelled patients.</div>
+    }
+    else
+    {
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                    <th class="px-6 py-3">Patient</th>
+                    <th class="px-6 py-3">PhilHealth No.</th>
+                    <th class="px-6 py-3">Cancelled On</th>
+                    <th class="px-6 py-3 text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-sm font-semibold flex-shrink-0">
+                                    @p.FirstName[0]@p.LastName[0]
+                                </div>
+                                <div>
+                                    <div class="font-medium text-gray-900">@p.FullName</div>
+                                    <div class="text-xs text-gray-400 font-mono">#@p.PatientId.ToString("D4")</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-600">@(p.PhilhealthNo ?? "—")</td>
+                        <td class="px-6 py-4 text-gray-600">@(p.DeletedAt?.ToString("MMM dd, yyyy") ?? "—")</td>
+                        <td class="px-6 py-4 text-right">
+                            <form asp-action="Restore" asp-route-id="@p.PatientId" method="post" style="margin:0; display:inline;">
+                                <button type="submit"
+                                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors border-none cursor-pointer">
+                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+                                    Restore
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
