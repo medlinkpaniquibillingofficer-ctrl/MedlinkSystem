@@ -11,8 +11,17 @@ namespace MedlinkDialysisCenter.Data
         {
         }
 
-        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Patient>           Patients            { get; set; }
+        public DbSet<PHRequirement>     PHRequirements      { get; set; }
+        public DbSet<InventoryItemModel>     InventoryItems      { get; set; }
+        public DbSet<StockTransactionModel>  StockTransactions   { get; set; }
 
-        public DbSet<PHRequirement> PHRequirements { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder){
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<StockTransactionModel>()
+                .Property(t => t.TransactionType)
+                .HasConversion<string>();
+        }
     }
 }

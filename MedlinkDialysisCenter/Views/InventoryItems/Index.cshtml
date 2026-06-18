@@ -1,0 +1,84 @@
+﻿@model List<MedlinkDialysisCenter.Models.InventoryItemModel>
+
+@{
+    ViewData["Title"] = "Inventory Items";
+}
+
+<!-- Header -->
+<div class="flex items-center justify-between mb-7 pt-1">
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">Inventory items</h1>
+        <p class="text-sm text-gray-500 mt-1">Manage materials and supplies tracked by the center</p>
+    </div>
+    <div class="flex items-center gap-2">
+        <a asp-action="Create"
+           class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            Add Item
+        </a>
+    </div>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    @if (!Model.Any())
+    {
+        <div class="px-6 py-14 text-center text-sm text-gray-400">No inventory items yet.</div>
+    }
+    else
+    {
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                    <th class="px-6 py-3">Material</th>
+                    <th class="px-6 py-3">Unit</th>
+                    <th class="px-6 py-3">Current stock</th>
+                    <th class="px-6 py-3">Reorder level</th>
+                    <th class="px-6 py-3 text-right">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var isLow = item.CurrentStock <= item.ReorderLevel;
+                    <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50">
+                        <td class="px-6 py-4 font-medium text-gray-900">@item.Name</td>
+                        <td class="px-6 py-4 text-gray-600">@item.Unit</td>
+                        <td class="px-6 py-4">
+                            @if (isLow)
+                            {
+                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 font-medium text-xs">
+                                    @item.CurrentStock @item.Unit · Low
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-gray-800">@item.CurrentStock @item.Unit</span>
+                            }
+                        </td>
+                        <td class="px-6 py-4 text-gray-500">@item.ReorderLevel</td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="inline-flex items-center gap-2">
+                                <a asp-controller="StockTransactions" asp-action="Create" asp-route-itemId="@item.Id"
+                                   class="inline-flex items-center px-3 py-1.5 rounded-lg border-[1.5px] border-gray-200 bg-white text-xs font-medium text-gray-600 no-underline hover:border-green-500 hover:text-green-600 transition-all">
+                                    Log Stock
+                                </a>
+                                <a asp-controller="StockTransactions" asp-action="History" asp-route-itemId="@item.Id"
+                                   class="inline-flex items-center px-3 py-1.5 rounded-lg border-[1.5px] border-gray-200 bg-white text-xs font-medium text-gray-600 no-underline hover:border-gray-400 hover:text-gray-800 transition-all">
+                                    History
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Id"
+                                   class="inline-flex items-center px-3 py-1.5 rounded-lg border-[1.5px] border-gray-200 bg-white text-xs font-medium text-gray-600 no-underline hover:border-blue-500 hover:text-blue-600 transition-all">
+                                    Edit
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id"
+                                   class="inline-flex items-center px-3 py-1.5 rounded-lg border-[1.5px] border-gray-200 bg-white text-xs font-medium text-gray-600 no-underline hover:border-red-500 hover:text-red-600 transition-all">
+                                    Remove
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,65 @@
+﻿@using MedlinkDialysisCenter.Models
+@model List<StockTransactionModel>
+
+@{
+    var item = (InventoryItemModel)ViewBag.Item;
+    ViewData["Title"] = "Stock History";
+}
+
+<!-- Header -->
+<div class="flex items-center gap-3.5 mb-7">
+    <a asp-controller="InventoryItems" asp-action="Index"
+       class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+    </a>
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">@item.Name — stock history</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Current stock: @item.CurrentStock @item.Unit</p>
+    </div>
+</div>
+
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+    @if (!Model.Any())
+    {
+        <div class="px-6 py-14 text-center text-sm text-gray-400">No transactions logged yet.</div>
+    }
+    else
+    {
+        <table class="w-full text-sm">
+            <thead>
+                <tr class="bg-gray-50 border-b border-gray-200 text-left text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                    <th class="px-6 py-3">Date</th>
+                    <th class="px-6 py-3">Type</th>
+                    <th class="px-6 py-3">Quantity</th>
+                    <th class="px-6 py-3">Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var t in Model)
+                {
+                    var qtyDisplay = t.TransactionType == TransactionType.Received ? $"+{t.Quantity}"
+                                    : t.TransactionType == TransactionType.Usage ? $"-{t.Quantity}"
+                                    : (t.Quantity >= 0 ? $"+{t.Quantity}" : $"{t.Quantity}");
+
+                    var badgeClass = t.TransactionType switch
+                    {
+                        TransactionType.Received => "bg-green-50 text-green-700",
+                        TransactionType.Usage => "bg-gray-100 text-gray-600",
+                        _ => "bg-amber-50 text-amber-700"
+                    };
+
+                    var qtyColor = qtyDisplay.StartsWith("+") ? "text-green-700" : "text-red-700";
+
+                    <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50">
+                        <td class="px-6 py-4 text-gray-600">@t.TransactionDate.ToString("MMM dd, yyyy")</td>
+                        <td class="px-6 py-4">
+                            <span class="inline-flex items-center px-2.5 py-1 rounded-lg @badgeClass font-medium text-xs">@t.TransactionType</span>
+                        </td>
+                        <td class="px-6 py-4 font-medium @qtyColor">@qtyDisplay @item.Unit</td>
+                        <td class="px-6 py-4 text-gray-500">@(t.Notes ?? "—")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

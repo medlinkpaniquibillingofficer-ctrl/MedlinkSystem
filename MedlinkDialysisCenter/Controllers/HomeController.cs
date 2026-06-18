@@ -1,4 +1,5 @@
-using MedlinkDialysisCenter.Models;
+
+using MedlinkDialysisCenter.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

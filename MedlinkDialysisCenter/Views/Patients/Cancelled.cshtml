@@ -16,6 +16,25 @@
     </div>
 </div>
 
+@if (Model.Any())
+{
+    <!-- Search bar -->
+    <div class="mb-4">
+        <div class="relative max-w-sm">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" id="searchInput" placeholder="Search by name, patient ID, or PhilHealth no."
+                   class="w-full pl-9 pr-9 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+            <button type="button" id="clearSearchBtn"
+                    class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 bg-transparent border-none cursor-pointer">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+            </button>
+        </div>
+    </div>
+}
+
 <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
     @if (!Model.Any())
     {
@@ -32,10 +51,11 @@
                     <th class="px-6 py-3 text-right">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="patientsTableBody">
                 @foreach (var p in Model)
                 {
-                    <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50">
+                    var searchBlob = $"{p.FullName} {p.PatientId.ToString("D4")} {p.PhilhealthNo}".ToLower();
+                    <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50" data-search="@searchBlob">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
                                 <div class="w-9 h-9 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-sm font-semibold flex-shrink-0">
@@ -50,17 +70,108 @@
                         <td class="px-6 py-4 text-gray-600">@(p.PhilhealthNo ?? "—")</td>
                         <td class="px-6 py-4 text-gray-600">@(p.DeletedAt?.ToString("MMM dd, yyyy") ?? "—")</td>
                         <td class="px-6 py-4 text-right">
-                            <form asp-action="Restore" asp-route-id="@p.PatientId" method="post" style="margin:0; display:inline;">
-                                <button type="submit"
-                                        class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors border-none cursor-pointer">
-                                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
-                                    Restore
-                                </button>
-                            </form>
+                            <button type="button"
+                                    class="restore-trigger inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-600 text-white text-xs font-medium hover:bg-blue-700 transition-colors border-none cursor-pointer"
+                                    data-id="@p.PatientId"
+                                    data-name="@p.FullName">
+                                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+                                Restore
+                            </button>
                         </td>
                     </tr>
                 }
+                <tr id="noResultsRow" class="hidden">
+                    <td colspan="4" class="px-6 py-14 text-center text-sm text-gray-400">No matching patients found.</td>
+                </tr>
             </tbody>
         </table>
     }
 </div>
+
+<!-- Shared hidden form — actually submits the Restore action -->
+<form id="restoreForm" asp-action="Restore" method="post" style="display:none">
+    <input type="hidden" name="id" id="restoreId" value="" />
+</form>
+
+<!-- Confirmation Modal -->
+<div id="restoreModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+    <div class="bg-white rounded-2xl shadow-lg max-w-sm w-full overflow-hidden">
+        <div class="bg-blue-50 border-b border-blue-200 px-6 py-4 flex items-start gap-3">
+            <div class="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
+            </div>
+            <div>
+                <div class="text-sm font-semibold text-blue-700 mb-1">Restore this patient?</div>
+                <div class="text-sm text-blue-600 leading-relaxed">
+                    <span id="restorePatientName" class="font-medium"></span> will reappear in the active Patients list, with all of their previous records intact.
+                </div>
+            </div>
+        </div>
+        <div class="px-6 py-4 bg-gray-50 flex items-center justify-end gap-2.5">
+            <button type="button" id="restoreCancelBtn"
+                    class="inline-flex items-center px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 hover:text-gray-800 hover:border-gray-400 transition-all cursor-pointer">
+                Cancel
+            </button>
+            <button type="submit" form="restoreForm"
+                    class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm border-none cursor-pointer">
+                Yes, Restore
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // --- Search filter ---
+        var searchInput = document.getElementById('searchInput');
+        var clearBtn = document.getElementById('clearSearchBtn');
+        var noResultsRow = document.getElementById('noResultsRow');
+
+        if (searchInput) {
+            var rows = document.querySelectorAll('#patientsTableBody tr[data-search]');
+
+            searchInput.addEventListener('input', function() {
+                var query = searchInput.value.trim().toLowerCase();
+                clearBtn.classList.toggle('hidden', query === '');
+
+                var visibleCount = 0;
+                rows.forEach(function(row) {
+                    var match = row.dataset.search.includes(query);
+                    row.classList.toggle('hidden', !match);
+                    if (match) visibleCount++;
+                });
+
+                noResultsRow.classList.toggle('hidden', visibleCount !== 0);
+            });
+
+            clearBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                searchInput.dispatchEvent(new Event('input'));
+                searchInput.focus();
+            });
+        }
+
+        // --- Restore modal ---
+        var modal = document.getElementById('restoreModal');
+        var idField = document.getElementById('restoreId');
+        var nameLabel = document.getElementById('restorePatientName');
+
+        document.querySelectorAll('.restore-trigger').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                idField.value = btn.dataset.id;
+                nameLabel.textContent = btn.dataset.name;
+                modal.classList.remove('hidden');
+            });
+        });
+
+        function closeModal() { modal.classList.add('hidden'); }
+
+        document.getElementById('restoreCancelBtn').addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    })();
+</script>

@@ -1,0 +1,97 @@
+﻿@model MedlinkDialysisCenter.ViewModels.StockTransactionFormViewModel
+
+@{
+    ViewData["Title"] = "Log Stock Movement";
+}
+
+<!-- Header -->
+<div class="flex items-center gap-3.5 mb-7">
+    <a asp-controller="InventoryItems" asp-action="Index"
+       class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+    </a>
+    <div>
+        <h1 class="text-2xl font-semibold tracking-tight m-0">Log stock movement</h1>
+        <p class="text-sm text-gray-500 mt-0.5">Record usage, received supply, or a manual correction</p>
+    </div>
+</div>
+
+<div class="max-w-lg">
+    <form asp-action="Create" method="post" class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <input type="hidden" asp-for="InventoryItemId" />
+
+        <!-- Item summary -->
+        <div class="px-6 py-4 bg-gray-50 border-b border-gray-100">
+            <div class="text-sm font-semibold text-gray-900">@Model.ItemName</div>
+            <div class="text-xs text-gray-500 mt-0.5">Current stock: @Model.CurrentStock @Model.Unit</div>
+        </div>
+
+        <div class="px-6 py-5 space-y-4">
+            <div>
+                <label asp-for="TransactionType" class="block text-xs font-medium text-gray-500 mb-1.5">Movement type</label>
+                <select asp-for="TransactionType" id="transactionType"
+                        class="w-full px-3.5 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+                    <option value="Usage">Usage (deduct from stock)</option>
+                    <option value="Received">Received (add to stock)</option>
+                    <option value="Adjustment">Adjustment (manual correction)</option>
+                </select>
+            </div>
+
+            <div id="directionField" class="hidden">
+                <label asp-for="AdjustmentDirection" class="block text-xs font-medium text-gray-500 mb-1.5">Adjustment direction</label>
+                <select asp-for="AdjustmentDirection"
+                        class="w-full px-3.5 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all">
+                    <option value="Increase">Increase stock</option>
+                    <option value="Decrease">Decrease stock</option>
+                </select>
+            </div>
+
+            <div>
+                <label asp-for="Quantity" class="block text-xs font-medium text-gray-500 mb-1.5">Quantity</label>
+                <input asp-for="Quantity" type="number" min="1"
+                       class="w-full px-3.5 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+                <span asp-validation-for="Quantity" class="text-xs text-red-500"></span>
+            </div>
+
+            <div>
+                <label for="TransactionDate" class="block text-xs font-medium text-gray-500 mb-1.5">Date</label>
+                <input type="date" name="TransactionDate" id="TransactionDate"
+                       value="@Model.TransactionDate.ToString("yyyy-MM-dd")"
+                       class="w-full px-3.5 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+            </div>
+
+            <div>
+                <label asp-for="Notes" class="block text-xs font-medium text-gray-500 mb-1.5">Notes (optional)</label>
+                <input asp-for="Notes" placeholder="e.g. Used for dialysis sessions, Delivery from supplier"
+                       class="w-full px-3.5 py-2.5 rounded-xl border-[1.5px] border-gray-200 text-sm focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all" />
+            </div>
+        </div>
+
+        <div class="px-6 py-4 bg-gray-50 flex items-center justify-end gap-2.5">
+            <a asp-controller="InventoryItems" asp-action="Index"
+               class="inline-flex items-center px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 no-underline hover:text-gray-800 hover:border-gray-400 transition-all">
+                Cancel
+            </a>
+            <button type="submit"
+                    class="inline-flex items-center px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm border-none cursor-pointer">
+                Save Entry
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    (function() {
+        var typeSelect = document.getElementById('transactionType');
+        var directionField = document.getElementById('directionField');
+        var batchFields = document.getElementById('batchFields');
+
+        function toggleFields() {
+            directionField.classList.toggle('hidden', typeSelect.value !== 'Adjustment');
+            batchFields.classList.toggle('hidden', typeSelect.value !== 'Received');
+        }
+
+        typeSelect.addEventListener('change', toggleFields);
+        toggleFields();
+    })();
+</script>
