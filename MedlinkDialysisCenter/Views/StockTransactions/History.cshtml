@@ -51,7 +51,7 @@
                     var qtyColor = qtyDisplay.StartsWith("+") ? "text-green-700" : "text-red-700";
 
                     <tr class="border-b border-gray-100 last:border-0 hover:bg-gray-50/50">
-                        <td class="px-6 py-4 text-gray-600">@t.TransactionDate.ToString("MMM dd, yyyy")</td>
+                        <td class="px-6 py-4 text-gray-600">@t.TransactionDate.ToString("MMM dd, yyyy hh:mm tt")</td>
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center px-2.5 py-1 rounded-lg @badgeClass font-medium text-xs">@t.TransactionType</span>
                         </td>

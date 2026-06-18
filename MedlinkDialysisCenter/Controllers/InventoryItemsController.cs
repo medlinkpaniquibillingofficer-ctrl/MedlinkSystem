@@ -128,7 +128,6 @@ namespace MedlinkDialysisCenter.Controllers
             // ── Styles ──────────────────────────────────────────────
             var headerFill = XLColor.FromArgb(0x1F, 0x49, 0x7D);   // dark blue
             var lowStockFill = XLColor.FromArgb(0xFF, 0xE6, 0x99);    // amber
-            var titleFont = ws.Cell("A1").Style.Font;
 
             // ── Title block ─────────────────────────────────────────
             ws.Cell("A1").Value = "Medlink Dialysis Center – Inventory Report";
