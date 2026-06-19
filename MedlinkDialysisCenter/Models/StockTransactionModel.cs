@@ -10,8 +10,7 @@ namespace MedlinkDialysisCenter.Models
         Adjustment
     }
 
-    public class StockTransactionModel
-    {
+    public class StockTransactionModel{
         public int                  Id                      { get; set; }
 
         [Required]

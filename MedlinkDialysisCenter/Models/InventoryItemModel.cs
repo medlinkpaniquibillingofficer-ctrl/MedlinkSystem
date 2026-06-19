@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MedlinkDialysisCenter.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MedlinkDialysisCenter.Models
 {
@@ -19,6 +20,7 @@ namespace MedlinkDialysisCenter.Models
         public bool     IsActive        { get; set; } = true;
 
         public DateTime CreatedAt       { get; set; } = DateTime.Now;
+        public InventoryCategory Category { get; set; }
 
         public List<StockTransactionModel> StockTransactions { get; set; } = new();
     }

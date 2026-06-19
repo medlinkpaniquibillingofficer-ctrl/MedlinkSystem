@@ -1,9 +1,11 @@
-﻿using MedlinkDialysisCenter.Data;
+﻿using ClosedXML.Excel;
+using MedlinkDialysisCenter.Data;
+using MedlinkDialysisCenter.Enums;
 using MedlinkDialysisCenter.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ClosedXML.Excel;
+using MedlinkDialysisCenter.Extensions;
 
 namespace MedlinkDialysisCenter.Controllers
 {
@@ -18,11 +20,20 @@ namespace MedlinkDialysisCenter.Controllers
         }
 
         // GET: /InventoryItems
-        public async Task<IActionResult> Index(){
-            var items = await _db.InventoryItems
-                .Where(i => i.IsActive)
-                .OrderBy(i => i.Name)
+        public async Task<IActionResult> Index(InventoryCategory? category){
+            var query = _db.InventoryItems
+                .Where(i => i.IsActive);
+
+            if (category.HasValue)
+                query = query.Where(i => i.Category == category.Value);
+
+            var items = await query
+                .OrderByDescending(i => i.CreatedAt)
                 .ToListAsync();
+
+            ViewBag.SelectedCategory = category;
+            ViewBag.Categories = Enum.GetValues<InventoryCategory>();
+
             return View(items);
         }
 
@@ -81,9 +92,10 @@ namespace MedlinkDialysisCenter.Controllers
             if (ModelState.IsValid)
             {
                 // Only descriptive fields are updated here — CurrentStock changes only through transactions
-                existing.Name = item.Name;
-                existing.Unit = item.Unit;
-                existing.ReorderLevel = item.ReorderLevel;
+                existing.Name           = item.Name;
+                existing.Unit           = item.Unit;
+                existing.ReorderLevel   = item.ReorderLevel;
+                existing.Category       = item.Category;
 
                 await _db.SaveChangesAsync();
                 TempData["Success"] = "Item updated successfully.";
@@ -115,12 +127,14 @@ namespace MedlinkDialysisCenter.Controllers
         }
 
         // GET: /InventoryItems/ExportToExcel
-        public async Task<IActionResult> ExportToExcel()
+        public async Task<IActionResult> ExportToExcel(InventoryCategory? category)
         {
-            var items = await _db.InventoryItems
-                .Where(i => i.IsActive)
-                .OrderBy(i => i.Name)
-                .ToListAsync();
+            var query = _db.InventoryItems.Where(i => i.IsActive);
+
+            if (category.HasValue)
+                query = query.Where(i => i.Category == category.Value);
+
+            var items = await query.OrderBy(i => i.Name).ToListAsync();
 
             using var workbook = new XLWorkbook();
             var ws = workbook.Worksheets.Add("Inventory Report");
@@ -130,7 +144,11 @@ namespace MedlinkDialysisCenter.Controllers
             var lowStockFill = XLColor.FromArgb(0xFF, 0xE6, 0x99);    // amber
 
             // ── Title block ─────────────────────────────────────────
-            ws.Cell("A1").Value = "Medlink Dialysis Center – Inventory Report";
+            string categoryLabel = category.HasValue
+            ? category.Value.GetDisplayName()
+            : "All Categories";
+
+            ws.Cell("A1").Value = $"Medlink Dialysis Center – Inventory Report ({categoryLabel})";
             ws.Cell("A1").Style.Font.Bold = true;
             ws.Cell("A1").Style.Font.FontSize = 14;
             ws.Range("A1:G1").Merge();
