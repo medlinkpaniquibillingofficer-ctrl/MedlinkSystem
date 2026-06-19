@@ -1,0 +1,144 @@
+﻿@model MedlinkDialysisCenter.ViewModels.HepaTestViewModel
+
+@{
+    ViewData["Title"] = "Hepatitis Screening";
+}
+
+<!-- Header -->
+<div class="flex items-center justify-between mb-6 pt-1">
+    <div class="flex items-center gap-3.5">
+        <a asp-controller="Patients" asp-action="Details" asp-route-id="@Model.PatientCode"
+           class="inline-flex items-center justify-center w-9 h-9 rounded-xl border-[1.5px] border-gray-200 bg-white text-gray-500 no-underline hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7" /></svg>
+        </a>
+        <div>
+            <h1 class="text-2xl font-semibold tracking-tight m-0">Hepatitis Screening</h1>
+            <p class="text-sm text-gray-500 mt-0.5">@Model.PatientName <span class="font-mono text-gray-400 ml-1">@Model.PatientCode</span></p>
+        </div>
+    </div>
+</div>
+
+<form asp-action="Manage" method="post" class="space-y-5">
+    <input type="hidden" asp-for="PatientId" />
+
+    <!-- Hepa B -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden" id="section-hepab">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+            <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Hepa B</span>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+                <span class="text-sm text-gray-500 font-medium">Tested</span>
+                <input type="checkbox" asp-for="HepaBTested" onchange="toggleResult('hepab', this.checked)"
+                       class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+            </label>
+        </div>
+        <div id="hepab-result" class="px-5 py-4 @(Model.HepaBTested ? "" : "hidden")">
+            <label class="text-sm text-gray-500 font-medium block mb-2">Result</label>
+            <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="HepaBResult" value="Positive" class="sr-only" /> Positive
+                    </label>
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="HepaBResult" value="Negative" class="sr-only" /> Negative
+                    </label>
+                </div>
+            </div>
+            <span asp-validation-for="HepaBResult" class="text-xs text-red-500 mt-1 block"></span>
+        </div>
+        <div id="hepab-nottested" class="px-5 py-4 text-sm text-gray-400 italic @(Model.HepaBTested ? "hidden" : "")">
+            Not tested — tick the checkbox above to record a result.
+        </div>
+    </div>
+
+    <!-- Anti HBS -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden" id="section-antihbs">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+            <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Anti HBS</span>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+                <span class="text-sm text-gray-500 font-medium">Tested</span>
+                <input type="checkbox" asp-for="AntiHBSTested" onchange="toggleResult('antihbs', this.checked)"
+                       class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+            </label>
+        </div>
+        <div id="antihbs-result" class="px-5 py-4 @(Model.AntiHBSTested ? "" : "hidden")">
+            <label class="text-sm text-gray-500 font-medium block mb-2">Result</label>
+            <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="AntiHBSResult" value="Positive" class="sr-only" /> Positive
+                    </label>
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="AntiHBSResult" value="Negative" class="sr-only" /> Negative
+                    </label>
+                </div>
+            </div>
+            <span asp-validation-for="AntiHBSResult" class="text-xs text-red-500 mt-1 block"></span>
+        </div>
+        <div id="antihbs-nottested" class="px-5 py-4 text-sm text-gray-400 italic @(Model.AntiHBSTested ? "hidden" : "")">
+            Not tested — tick the checkbox above to record a result.
+        </div>
+    </div>
+
+    <!-- Hepa C -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden" id="section-hepac">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+            <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Hepa C</span>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+                <span class="text-sm text-gray-500 font-medium">Tested</span>
+                <input type="checkbox" asp-for="HepaCTested" onchange="toggleResult('hepac', this.checked)"
+                       class="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 cursor-pointer" />
+            </label>
+        </div>
+        <div id="hepac-result" class="px-5 py-4 @(Model.HepaCTested ? "" : "hidden")">
+            <label class="text-sm text-gray-500 font-medium block mb-2">Result</label>
+            <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2">
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="HepaCResult" value="Positive" class="sr-only" /> Positive
+                    </label>
+                    <label class="flex items-center gap-2 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 cursor-pointer text-sm font-medium text-gray-600 hover:border-blue-400 hover:bg-blue-50 transition-all has-[:checked]:border-blue-500 has-[:checked]:bg-blue-50 has-[:checked]:text-blue-700">
+                        <input type="radio" asp-for="HepaCResult" value="Negative" class="sr-only" /> Negative
+                    </label>
+                </div>
+            </div>
+            <span asp-validation-for="HepaCResult" class="text-xs text-red-500 mt-1 block"></span>
+        </div>
+        <div id="hepac-nottested" class="px-5 py-4 text-sm text-gray-400 italic @(Model.HepaCTested ? "hidden" : "")">
+            Not tested — tick the checkbox above to record a result.
+        </div>
+    </div>
+
+    <!-- Date & Remarks -->
+    <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 text-[11px] font-semibold text-gray-400 uppercase tracking-wider">
+            Additional Info
+        </div>
+        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="text-sm text-gray-500 font-medium block mb-1.5">Remarks <span class="text-gray-300 font-normal">(optional)</span></label>
+                <input type="text" asp-for="Remarks" placeholder="Any notes..."
+                       class="w-full px-3.5 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 transition-colors" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center justify-end gap-2 pb-6">
+        <a asp-controller="Patients" asp-action="Details" asp-route-id="@Model.PatientCode"
+           class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border-[1.5px] border-gray-200 bg-white text-sm font-medium text-gray-500 no-underline hover:text-gray-800 hover:border-gray-400 transition-all">
+            Cancel
+        </a>
+        <button type="submit"
+                class="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm">
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v14a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>
+            Save Screening Record
+        </button>
+    </div>
+</form>
+
+<script>
+    function toggleResult(key, checked) {
+        document.getElementById(key + '-result').classList.toggle('hidden', !checked);
+        document.getElementById(key + '-nottested').classList.toggle('hidden', checked);
+    }
+</script>

@@ -1,4 +1,5 @@
 using MedlinkDialysisCenter.Data;
+using MedlinkDialysisCenter.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,16 +22,13 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.AccessDeniedPath = "/Account/Login";
-});
-
-builder.Services.ConfigureApplicationCookie(options =>
-{
-    options.LoginPath = "/Account/Login";
-    options.AccessDeniedPath = "/Account/Login";
     options.ExpireTimeSpan = TimeSpan.FromHours(8); // auto logout after 8 hours
 });
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<PatientService>();
+builder.Services.AddScoped<HepaTestService>();
+builder.Services.AddScoped<VaccineService>();
 
 var app = builder.Build(); 
 

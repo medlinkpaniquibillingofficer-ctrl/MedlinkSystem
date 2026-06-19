@@ -27,6 +27,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/HepaTest/Manage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVwYVRlc3RcTWFuYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -45,6 +49,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/InventoryItems/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5SXRlbXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/Manage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/Patients/Cancelled.cshtml]
@@ -109,6 +117,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/UserManagement/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlck1hbmFnZW1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/Vaccine/Manage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmFjY2luZVxNYW5hZ2UuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ADMIN/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/_ViewImports.cshtml]

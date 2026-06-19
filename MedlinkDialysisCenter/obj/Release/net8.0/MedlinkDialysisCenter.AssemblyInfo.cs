@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedlinkDialysisCenter")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdd3fd200bf9ae366a162654ecb26042fa66b5ec")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bfb9f696e7f818495c2b16137c2f709b41c0c221")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedlinkDialysisCenter")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedlinkDialysisCenter")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

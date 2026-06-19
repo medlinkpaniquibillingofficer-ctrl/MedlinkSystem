@@ -22,7 +22,56 @@ namespace MedlinkDialysisCenter.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.InventoryItem", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.HepaTestModel", b =>
+                {
+                    b.Property<int>("HepaTestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("HepaTestId"));
+
+                    b.Property<int?>("AntiHBSResult")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("AntiHBSTested")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("HepaBResult")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HepaBTested")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("HepaCResult")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("HepaCTested")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Remarks")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("TestedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("HepaTestId");
+
+                    b.HasIndex("PatientId")
+                        .IsUnique();
+
+                    b.ToTable("HepaTests");
+                });
+
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.InventoryItemModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +236,38 @@ namespace MedlinkDialysisCenter.Migrations
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.StockTransaction", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.PatientVaccineModel", b =>
+                {
+                    b.Property<int>("PatientVaccineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PatientVaccineId"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateGiven")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Dose")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("VaccineName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PatientVaccineId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("PatientVaccines");
+                });
+
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.StockTransactionModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -195,14 +275,7 @@ namespace MedlinkDialysisCenter.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BatchNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ExpiryDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("InventoryItemId")
@@ -427,6 +500,17 @@ namespace MedlinkDialysisCenter.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.HepaTestModel", b =>
+                {
+                    b.HasOne("MedlinkDialysisCenter.Models.Patient", "Patient")
+                        .WithOne("HepaTest")
+                        .HasForeignKey("MedlinkDialysisCenter.Models.HepaTestModel", "PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
             modelBuilder.Entity("MedlinkDialysisCenter.Models.PHRequirement", b =>
                 {
                     b.HasOne("MedlinkDialysisCenter.Models.Patient", "Patient")
@@ -438,9 +522,20 @@ namespace MedlinkDialysisCenter.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.StockTransaction", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.PatientVaccineModel", b =>
                 {
-                    b.HasOne("MedlinkDialysisCenter.Models.InventoryItem", "InventoryItem")
+                    b.HasOne("MedlinkDialysisCenter.Models.Patient", "Patient")
+                        .WithMany("Vaccines")
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Patient");
+                });
+
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.StockTransactionModel", b =>
+                {
+                    b.HasOne("MedlinkDialysisCenter.Models.InventoryItemModel", "InventoryItem")
                         .WithMany("StockTransactions")
                         .HasForeignKey("InventoryItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -500,9 +595,16 @@ namespace MedlinkDialysisCenter.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.InventoryItem", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.InventoryItemModel", b =>
                 {
                     b.Navigation("StockTransactions");
+                });
+
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.Patient", b =>
+                {
+                    b.Navigation("HepaTest");
+
+                    b.Navigation("Vaccines");
                 });
 #pragma warning restore 612, 618
         }

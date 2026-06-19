@@ -1,216 +1,86 @@
-﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.InkML;
-using MedlinkDialysisCenter.Data;
-using MedlinkDialysisCenter.Models;
+﻿using MedlinkDialysisCenter.Models;
+using MedlinkDialysisCenter.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MedlinkDialysisCenter.Controllers
 {
     [Authorize(Roles = "Admin,Nurse")]
     public class PatientsController : Controller
     {
-        private readonly AppDbContext _db;
+        private readonly PatientService _patientService;
 
-        public PatientsController(AppDbContext db)
+        public PatientsController(PatientService patientService)
         {
-            _db = db;
+            _patientService = patientService;
         }
 
-        // GET: /Patients
-        public async Task<IActionResult> Index()
-        {
-            var patients = await _db.Patients
-                .Where(p => !p.IsDeleted)
-                .OrderByDescending(p => p.PatientCode)
-                .ToListAsync();
-            return View(patients);
-        }
+        public async Task<IActionResult> Index() =>
+            View(await _patientService.GetActivePatients());
 
-        // GET: /Patients/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(string id)
         {
-            var patient = await _db.Patients.FindAsync(id);
+            var patient = await _patientService.GetByCode(id);
             if (patient == null) return NotFound();
             return View(patient);
-        }
+        } 
 
-        // GET: /Patients/Create
         public IActionResult Create() => View();
 
-        // POST: /Patients/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Patient patient)
         {
-            if (ModelState.IsValid)
-            {
-                patient.PhilhealthNo = patient.PhilhealthNo?.Replace(" ", "");
-                patient.ContactNo = patient.ContactNo?.Replace(" ", "");
-                patient.CreatedAt = DateTime.Now;
-
-                _db.Patients.Add(patient);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(patient);
+            if (!ModelState.IsValid) return View(patient);
+            await _patientService.CreatePatient(patient);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Patients/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var patient = await _db.Patients.FindAsync(id);
+            var patient = await _patientService.GetById(id);
             if (patient == null) return NotFound();
             return View(patient);
         }
 
-        // POST: /Patients/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Patient patient)
         {
             if (id != patient.PatientId) return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                patient.PhilhealthNo = patient.PhilhealthNo?.Replace(" ", "");
-                patient.ContactNo = patient.ContactNo?.Replace(" ", "");
-
-                _db.Patients.Update(patient);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(patient);
+            if (!ModelState.IsValid) return View(patient);
+            await _patientService.UpdatePatient(patient);
+            return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Patients/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            var patient = await _db.Patients.FindAsync(id);
+            var patient = await _patientService.GetById(id);
             if (patient == null) return NotFound();
             return View(patient);
         }
 
-        // POST: /Patients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var patient = await _db.Patients.FindAsync(id);
-            if (patient != null)
-            {
-                patient.IsDeleted = true;
-                patient.DeletedAt = DateTime.Now;
-                await _db.SaveChangesAsync();
-            }
+            await _patientService.SoftDelete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Patients/Cancelled
-        public async Task<IActionResult> Cancelled(){
-            var patients = await _db.Patients
-                .Where(p => p.IsDeleted)
-                .OrderByDescending(p => p.DeletedAt)
-                .ToListAsync();
-            return View(patients);
-        }
+        public async Task<IActionResult> Cancelled() =>
+            View(await _patientService.GetDeletedPatients());
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Restore(int id)
-        {
-            var patient = await _db.Patients.FindAsync(id);
-            if (patient != null)
-            {
-                patient.IsDeleted = false;
-                patient.DeletedAt = null;
-                await _db.SaveChangesAsync();
-            }
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Restore(int id){
+            await _patientService.Restore(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Celebrants()
-        {
-            var currentMonth = DateTime.Now.Month;
+        public IActionResult Celebrants() =>
+            View(_patientService.GetCelebrantsThisMonth());
 
-            var celebrants = _db.Patients
-                .Where(p => !p.IsDeleted && p.DateOfBirth.HasValue &&
-                            p.DateOfBirth.Value.Month == currentMonth)
-                .OrderBy(p => p.DateOfBirth.Value.Day)
-                .ToList();
-
-            return View(celebrants);
-        }
-
-        public IActionResult ExportToExcel()
-        {
-            var patients = _db.Patients.Where(p => !p.IsDeleted).ToList(); // or however you fetch patients
-
-            using var workbook = new XLWorkbook();
-            var ws = workbook.Worksheets.Add("Patients");
-
-            // --- Header row ---
-            var headers = new[] { "Patient ID", "Full Name", "Gender", "PhilHealth No.", "Contact No.", "Diagnosis", "Registered" };
-            for (int i = 0; i < headers.Length; i++)
-            {
-                var cell = ws.Cell(1, i + 1);
-                cell.Value = headers[i];
-                cell.Style.Font.Bold = true;
-                cell.Style.Font.FontColor = XLColor.White;
-                cell.Style.Fill.BackgroundColor = XLColor.FromArgb(37, 99, 235); // blue-600
-                cell.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Left;
-            }
-
-            // --- Data rows ---
-            for (int i = 0; i < patients.Count; i++)
-            {
-                var p = patients[i];
-                var row = i + 2;
-
-                ws.Cell(row, 1).Value = p.PatientId.ToString("D4");
-                ws.Cell(row, 2).Value = p.FullName;
-                ws.Cell(row, 3).Value = p.Gender ?? "—";
-                ws.Cell(row, 4).Value = p.PhilhealthNo ?? "—";
-                ws.Cell(row, 5).Value = p.ContactNo ?? "—";
-                ws.Cell(row, 6).Value = p.Diagnosis ?? "—";
-                ws.Cell(row, 7).Value = p.CreatedAt.ToString("yyyy-MM-dd");
-
-                // Zebra striping
-                if (i % 2 == 1)
-                {
-                    ws.Row(row).Style.Fill.BackgroundColor = XLColor.FromArgb(248, 250, 252); // slate-50
-                }
-            }
-
-            // --- Stat summary (mirrors your stat cards) ---
-            var summaryRow = patients.Count + 3;
-            ws.Cell(summaryRow, 1).Value = "Total Patients:";
-            ws.Cell(summaryRow, 1).Style.Font.Bold = true;
-            ws.Cell(summaryRow, 2).Value = patients.Count;
-
-            ws.Cell(summaryRow + 1, 1).Value = "Registered This Month:";
-            ws.Cell(summaryRow + 1, 1).Style.Font.Bold = true;
-            ws.Cell(summaryRow + 1, 2).Value = patients.Count(p =>
-                p.CreatedAt.Month == DateTime.Now.Month && p.CreatedAt.Year == DateTime.Now.Year);
-
-            // --- Auto-fit columns ---
-            ws.Columns().AdjustToContents();
-
-            // --- Freeze header row ---
-            ws.SheetView.FreezeRows(1);
-
-            // --- Table border ---
-            var dataRange = ws.Range(1, 1, patients.Count + 1, headers.Length);
-            dataRange.Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
-            dataRange.Style.Border.InsideBorder = XLBorderStyleValues.Hair;
-
-            using var stream = new MemoryStream();
-            workbook.SaveAs(stream);
-            stream.Seek(0, SeekOrigin.Begin);
-
+        public IActionResult ExportToExcel(){
+            var bytes = _patientService.ExportToExcel();
             var fileName = $"Patients_{DateTime.Now:yyyyMMdd_HHmm}.xlsx";
-            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
         }
     }
 }

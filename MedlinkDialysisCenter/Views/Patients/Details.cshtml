@@ -160,3 +160,164 @@
         </div>
     </div>
 </div>
+
+<!-- Hepa Test Summary -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mt-5">
+    <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Hepatitis Screening</span>
+        <a asp-controller="HepaTest" asp-action="Manage" asp-route-patientId="@Model.PatientId"
+           class="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 no-underline hover:underline">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            @(Model.HepaTest != null ? "Update Tests" : "Add Tests")
+        </a>
+    </div>
+
+    @if (Model.HepaTest == null)
+    {
+        <div class="px-5 py-8 text-center">
+            <div class="text-3xl mb-2 opacity-30">🧪</div>
+            <div class="text-sm font-medium text-gray-500 mb-1">No hepatitis screening on record</div>
+            <div class="text-xs text-gray-400">Add the patient's test results using the button above.</div>
+        </div>
+    }
+    else
+    {
+        var h = Model.HepaTest;
+
+        // Helper: badge color per result
+        string BadgeClass(bool tested, MedlinkDialysisCenter.Models.HepaResult? result)
+        {
+            if (!tested) return "bg-gray-100 text-gray-400";
+            return result switch
+            {
+                MedlinkDialysisCenter.Models.HepaResult.Positive => "bg-red-50 text-red-600 border border-red-200",
+                MedlinkDialysisCenter.Models.HepaResult.Negative => "bg-green-50 text-green-600 border border-green-200",
+                _ => "bg-gray-100 text-gray-400"
+            };
+        }
+
+        string BadgeLabel(bool tested, MedlinkDialysisCenter.Models.HepaResult? result)
+        {
+            if (!tested) return "Not Tested";
+            return result switch
+            {
+                MedlinkDialysisCenter.Models.HepaResult.Positive => "Positive",
+                MedlinkDialysisCenter.Models.HepaResult.Negative => "Negative",
+                _ => "—"
+            };
+        }
+
+        <div class="grid grid-cols-3 divide-x divide-gray-100">
+            <!-- Hepa B -->
+            <div class="px-5 py-4 text-center">
+                <div class="text-xs text-gray-400 font-medium mb-2">Hepa B</div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold @BadgeClass(h.HepaBTested, h.HepaBResult)">
+                    @BadgeLabel(h.HepaBTested, h.HepaBResult)
+                </span>
+            </div>
+            <!-- Anti HBS -->
+            <div class="px-5 py-4 text-center">
+                <div class="text-xs text-gray-400 font-medium mb-2">Anti HBS</div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold @BadgeClass(h.AntiHBSTested, h.AntiHBSResult)">
+                    @BadgeLabel(h.AntiHBSTested, h.AntiHBSResult)
+                </span>
+            </div>
+            <!-- Hepa C -->
+            <div class="px-5 py-4 text-center">
+                <div class="text-xs text-gray-400 font-medium mb-2">Hepa C</div>
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold @BadgeClass(h.HepaCTested, h.HepaCResult)">
+                    @BadgeLabel(h.HepaCTested, h.HepaCResult)
+                </span>
+            </div>
+        </div>
+
+        @if (!string.IsNullOrEmpty(h.Remarks))
+        {
+            <div class="border-t border-gray-100 px-5 py-3 flex items-center gap-5 text-xs text-gray-400">
+                @if (!string.IsNullOrEmpty(h.Remarks))
+                {
+                    <span>Remarks: <span class="text-gray-600">@h.Remarks</span></span>
+                }
+            </div>
+        }
+    }
+</div>
+
+<!-- Vaccinations -->
+<div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden mt-5">
+    <div class="px-5 py-3.5 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
+        <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">Vaccinations</span>
+        <a asp-controller="Vaccine" asp-action="Manage" asp-route-patientId="@Model.PatientId"
+           class="inline-flex items-center gap-1.5 text-xs font-medium text-blue-600 no-underline hover:underline">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+            </svg>
+            @(Model.Vaccines.Any() ? "Update Vaccines" : "Add Vaccines")
+        </a>
+    </div>
+
+    @if (!Model.Vaccines.Any())
+    {
+        <div class="px-5 py-8 text-center">
+            <div class="text-3xl mb-2 opacity-30">💉</div>
+            <div class="text-sm font-medium text-gray-500 mb-1">No vaccinations on record</div>
+            <div class="text-xs text-gray-400">Add vaccine records using the button above.</div>
+        </div>
+    }
+    else
+    {
+        <div class="divide-y divide-gray-100">
+            @foreach (var v in Model.Vaccines.OrderBy(v => v.DateGiven))
+            {
+                var doseLabel = v.Dose switch
+                {
+                    MedlinkDialysisCenter.Models.VaccineDose.First   => "1st Dose",
+                    MedlinkDialysisCenter.Models.VaccineDose.Second  => "2nd Dose",
+                    MedlinkDialysisCenter.Models.VaccineDose.Booster => "Booster",
+                    _ => "—"
+                };
+
+                var doseColor = v.Dose switch
+                {
+                    MedlinkDialysisCenter.Models.VaccineDose.First   => "bg-blue-50 text-blue-600 border border-blue-200",
+                    MedlinkDialysisCenter.Models.VaccineDose.Second  => "bg-purple-50 text-purple-600 border border-purple-200",
+                    MedlinkDialysisCenter.Models.VaccineDose.Booster => "bg-green-50 text-green-600 border border-green-200",
+                    _ => "bg-gray-100 text-gray-400"
+                };
+
+                <div class="flex items-center gap-4 px-5 py-3.5">
+                    <!-- Vaccine icon -->
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center flex-shrink-0">
+                        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M18 2l4 4-4 4" />
+                            <path d="M14.5 7.5L22 6" />
+                            <path d="M10 7L4 13l7 7 6-6" />
+                            <path d="M2 22l4-4" />
+                            <path d="M7 17l-3 3" />
+                        </svg>
+                    </div>
+
+                    <!-- Vaccine name -->
+                    <div class="flex-1">
+                        <div class="text-sm font-medium text-gray-900">@v.VaccineName</div>
+                        <div class="text-xs text-gray-400 mt-0.5">Given on @v.DateGiven.ToString("MMMM dd, yyyy")</div>
+                    </div>
+
+                    <!-- Dose badge -->
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold @doseColor">
+                        @doseLabel
+                    </span>
+                </div>
+            }
+        </div>
+
+        <!-- Summary count -->
+        <div class="border-t border-gray-100 px-5 py-3 text-xs text-gray-400">
+            @Model.Vaccines.Count() vaccine record@(Model.Vaccines.Count() > 1 ? "s" : "") on file
+        </div>
+    }
+</div>
