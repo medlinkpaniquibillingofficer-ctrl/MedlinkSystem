@@ -17,10 +17,12 @@ namespace MedlinkDialysisCenter.Data
         public DbSet<StockTransactionModel> StockTransactions   { get; set; }
 
         public DbSet<HepaTestModel>         HepaTests           { get; set; }
-        public DbSet<PatientVaccineModel> PatientVaccines { get; set; }
+        public DbSet<PatientVaccineModel>   PatientVaccines     { get; set; }
+
+        public DbSet<PhConsumptionModel>    PhConsumptions      { get; set; }
 
         // In OnModelCreating:
-        
+
 
 
 

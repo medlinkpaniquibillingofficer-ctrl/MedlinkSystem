@@ -4,6 +4,7 @@ using MedlinkDialysisCenter.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MedlinkDialysisCenter.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260622070957_AddPhilhealthConsumptionTable")]
+    partial class AddPhilhealthConsumptionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +273,7 @@ namespace MedlinkDialysisCenter.Migrations
                     b.ToTable("PatientVaccines");
                 });
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.PhConsumptionModel", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.PhilhealthConsumption", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -278,20 +281,8 @@ namespace MedlinkDialysisCenter.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("CenterName")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<int>("ConsumptionType")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("PatientId")
                         .HasColumnType("int");
@@ -303,17 +294,17 @@ namespace MedlinkDialysisCenter.Migrations
                     b.Property<DateTime>("SessionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SessionsConsumed")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
-                    b.Property<int>("YearCovered")
+                    b.Property<int>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("PhConsumptions");
+                    b.ToTable("PhilhealthConsumptions");
                 });
 
             modelBuilder.Entity("MedlinkDialysisCenter.Models.StockTransactionModel", b =>
@@ -582,12 +573,12 @@ namespace MedlinkDialysisCenter.Migrations
                     b.Navigation("Patient");
                 });
 
-            modelBuilder.Entity("MedlinkDialysisCenter.Models.PhConsumptionModel", b =>
+            modelBuilder.Entity("MedlinkDialysisCenter.Models.PhilhealthConsumption", b =>
                 {
                     b.HasOne("MedlinkDialysisCenter.Models.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Patient");

@@ -26,9 +26,10 @@ builder.Services.ConfigureApplicationCookie(options =>
 });
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<PatientService>();
 builder.Services.AddScoped<HepaTestService>();
+builder.Services.AddScoped<PatientService>();
 builder.Services.AddScoped<VaccineService>();
+builder.Services.AddScoped<IPhConsumptionService, PhConsumptionService>();
 
 var app = builder.Build(); 
 

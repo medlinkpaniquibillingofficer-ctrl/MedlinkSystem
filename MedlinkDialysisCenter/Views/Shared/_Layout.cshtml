@@ -139,8 +139,8 @@
                asp-action="Index"
                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
                 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Home"
-               ? "bg-white/10 text-white"
-               : "text-gray-400 hover:bg-white/5 hover:text-white")">
+              ? "bg-white/10 text-white"
+              : "text-gray-400 hover:bg-white/5 hover:text-white")">
 
                 <svg width="18"
                      height="18"
@@ -163,8 +163,8 @@
                asp-action="Index"
                class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
                 @(ViewContext.RouteData.Values["controller"]?.ToString() == "Patients"
-               ? "bg-white/10 text-white"
-               : "text-gray-400 hover:bg-white/5 hover:text-white")">
+              ? "bg-white/10 text-white"
+              : "text-gray-400 hover:bg-white/5 hover:text-white")">
 
                 <svg width="18"
                      height="18"
@@ -184,40 +184,39 @@
 
             <!-- INVENTORY -->
             @if (User.IsInRole("Admin"))
-                {
-                    <a asp-controller="InventoryItems"
-                    asp-action="Index"
-                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
-                @(ViewContext.RouteData.Values["controller"]?.ToString() == "InventoryItems"
-              ? "bg-white/10 text-white"
-              : "text-gray-400 hover:bg-white/5 hover:text-white")">
+            {
+                <a asp-controller="InventoryItems"
+                   asp-action="Index"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
+                    @(ViewContext.RouteData.Values["controller"]?.ToString() == "InventoryItems"
+                 ? "bg-white/10 text-white"
+                 : "text-gray-400 hover:bg-white/5 hover:text-white")">
 
-                        <svg width="18"
-                        height="18"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        viewBox="0 0 24 24">
+                    <svg width="18"
+                         height="18"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         viewBox="0 0 24 24">
 
-                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                            <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                            <line x1="12" y1="22.08" x2="12" y2="12" />
-                        </svg>
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                        <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
 
-                        Inventory
-                    </a>
-                }
+                    Inventory
+                </a>
+            }
 
-            <!-- PHILHEALTH -->
+            <!-- PHILHEALTH TRACKER -->
             @if (User.IsInRole("Admin"))
             {
-                <!-- ENABLED FOR ADMIN -->
                 <a asp-controller="PhilhealthRequirements"
                    asp-action="Index"
                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
                     @(ViewContext.RouteData.Values["controller"]?.ToString() == "PhilhealthRequirements"
-                   ? "bg-white/10 text-white"
-                   : "text-gray-400 hover:bg-white/5 hover:text-white")">
+                  ? "bg-white/10 text-white"
+                  : "text-gray-400 hover:bg-white/5 hover:text-white")">
 
                     <svg width="18"
                          height="18"
@@ -231,6 +230,28 @@
                     </svg>
 
                     PhilHealth Tracker
+                </a>
+
+                <!-- PHILHEALTH CONSUMPTION -->
+                <a asp-controller="PhConsumption"
+                   asp-action="Index"
+                   class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
+                    @(ViewContext.RouteData.Values["controller"]?.ToString() == "PhConsumption"
+                  ? "bg-white/10 text-white"
+                  : "text-gray-400 hover:bg-white/5 hover:text-white")">
+
+                    <svg width="18"
+                         height="18"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         viewBox="0 0 24 24">
+
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+
+                    Session Monitor
                 </a>
             }
             else
@@ -263,8 +284,8 @@
                    asp-action="Index"
                    class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all mb-1
                     @(ViewContext.RouteData.Values["controller"]?.ToString() == "UserManagement"
-                   ? "bg-white/10 text-white"
-                   : "text-gray-400 hover:bg-white/5 hover:text-white")">
+                  ? "bg-white/10 text-white"
+                  : "text-gray-400 hover:bg-white/5 hover:text-white")">
 
                     <!-- ICON -->
                     <svg width="18"

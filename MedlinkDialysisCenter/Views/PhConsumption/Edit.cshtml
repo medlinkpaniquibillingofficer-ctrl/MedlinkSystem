@@ -1,0 +1,78 @@
+@model MedlinkDialysisCenter.ViewModels.PhConsumptionViewModel
+@{
+    ViewData["Title"] = "Edit Record";
+}
+
+<div class="max-w-lg mx-auto">
+    <div class="flex items-center gap-3 mb-6">
+        <a asp-action="Details" asp-route-id="@Model.PatientId" class="text-gray-400 hover:text-gray-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+        </a>
+        <h1 class="text-xl font-bold text-gray-800">Edit Record</h1>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <form asp-action="Edit" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="PatientId" />
+            <input type="hidden" asp-for="ConsumptionType" />
+
+            <div asp-validation-summary="All" class="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg hidden [&:not(:empty)]:block"></div>
+
+            @if (Model.ConsumptionType == MedlinkDialysisCenter.Enums.PhConsumptionType.OtherCenter)
+            {
+                <div class="mb-4">
+                    <label asp-for="CenterName" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                    <input asp-for="CenterName" type="text"
+                           class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500" />
+                    <span asp-validation-for="CenterName" class="text-xs text-red-500"></span>
+                </div>
+            }
+
+            <div class="mb-4">
+                <label asp-for="SessionDate" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <input asp-for="SessionDate" type="date"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="SessionDate" class="text-xs text-red-500"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="SessionsConsumed" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <input asp-for="SessionsConsumed" type="number" min="1" max="156"
+                       class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500" />
+                <span asp-validation-for="SessionsConsumed" class="text-xs text-red-500"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="YearCovered" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <select asp-for="YearCovered"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500">
+                    @for (int y = DateTime.Now.Year; y >= DateTime.Now.Year - 3; y--)
+                    {
+                        <option value="@y">@y</option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-6">
+                <label asp-for="Remarks" class="block text-sm font-medium text-gray-700 mb-1"></label>
+                <textarea asp-for="Remarks" rows="3"
+                          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 resize-none"></textarea>
+            </div>
+
+            <div class="flex gap-3">
+                <button type="submit"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg text-sm transition">
+                    Save Changes
+                </button>
+                <a asp-action="Details" asp-route-id="@Model.PatientId"
+                   class="flex-1 text-center bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 rounded-lg text-sm transition">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -83,6 +83,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhConsumption/AddSession.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhDb25zdW1wdGlvblxBZGRTZXNzaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhConsumption/AddTransferee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhDb25zdW1wdGlvblxBZGRUcmFuc2ZlcmVlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhConsumption/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhDb25zdW1wdGlvblxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhConsumption/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhDb25zdW1wdGlvblxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhConsumption/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhDb25zdW1wdGlvblxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DELL/source/repos/MedlinkSystem/MedlinkDialysisCenter/Views/PhilhealthRequirements/CreateEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhpbGhlYWx0aFJlcXVpcmVtZW50c1xDcmVhdGVFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
