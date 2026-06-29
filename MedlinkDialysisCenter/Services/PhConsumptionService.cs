@@ -24,17 +24,22 @@ namespace MedlinkDialysisCenter.Services
             return BuildSummary(patient, records, year);
         }
 
-        public async Task<PhConsumptionIndexViewModel> GetIndexAsync(int year)
-        {
+        public async Task<PhConsumptionIndexViewModel> GetIndexAsync(int year){
             var records = await db.PhConsumptions
                 .Include(x => x.Patient)
+                .Where(x => !x.Patient.IsDeleted)
                 .Where(x => x.YearCovered == year)
                 .ToListAsync();
 
-            var patients = await db.Patients.ToListAsync();
+            var patients = await db.Patients
+                .Where(p => !p.IsDeleted)
+                .ToListAsync();
 
             var summaries = patients
-                .Select(p => BuildSummary(p, records.Where(r => r.PatientId == p.PatientId).ToList(), year))
+                .Select(p => BuildSummary(
+                    p,
+                    records.Where(r => r.PatientId == p.PatientId).ToList(),
+                    year))
                 .OrderBy(s => s.PatientCode)
                 .ToList();
 
