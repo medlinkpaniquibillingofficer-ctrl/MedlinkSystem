@@ -19,15 +19,87 @@ namespace MedlinkDialysisCenter.Controllers
             _db = db;
         }
 
-        // GET: /PhilhealthRequirements
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, string? search = null, string? category = null, string? status = null)
         {
-            var records = await _db.PHRequirements
+            const int pageSize = 9;
+
+            var query = _db.PHRequirements
                 .Include(r => r.Patient)
                 .Where(r => !r.Patient.IsDeleted)
+                .AsNoTracking();
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = query.Where(r => r.Patient.FirstName.Contains(search) ||
+                                         r.Patient.LastName.Contains(search));
+
+            if (!string.IsNullOrWhiteSpace(category))
+                query = query.Where(r => r.MemberCategory == category);
+
+            // Snapshot before status filter for accurate stat card counts
+            var baseQuery = query;
+
+            if (status == "complete")
+                query = query.Where(r =>
+                    r.HasCSF && r.HasCF2 && r.HasMDR &&
+                    r.HasPhilhealthId && r.HasPDDRegistration &&
+                    r.HasPhilhealthConsumption);
+            else if (status == "incomplete")
+                query = query.Where(r =>
+                    !r.HasCSF || !r.HasCF2 || !r.HasMDR ||
+                    !r.HasPhilhealthId || !r.HasPDDRegistration ||
+                    !r.HasPhilhealthConsumption);
+
+            var totalCount = await query.CountAsync();
+            var totalComplete = await baseQuery.CountAsync(r =>
+                r.HasCSF && r.HasCF2 && r.HasMDR &&
+                r.HasPhilhealthId && r.HasPDDRegistration &&
+                r.HasPhilhealthConsumption);
+            var totalAll = await baseQuery.CountAsync();
+
+            ViewBag.TotalComplete = totalComplete;
+            ViewBag.TotalIncomplete = totalAll - totalComplete;
+            ViewBag.Category = category;
+            ViewBag.Status = status;
+
+            var items = await query
                 .OrderByDescending(r => r.Patient.PatientCode)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(r => new PHRequirement
+                {
+                    Id = r.Id,
+                    MemberCategory = r.MemberCategory,
+                    HasCSF = r.HasCSF,
+                    HasCF2 = r.HasCF2,
+                    HasMDR = r.HasMDR,
+                    HasPhilhealthId = r.HasPhilhealthId,
+                    HasReceipt6Mos = r.HasReceipt6Mos,
+                    HasCertMonthlyContrib = r.HasCertMonthlyContrib,
+                    HasSCId = r.HasSCId,
+                    HasCSFEmployerSig = r.HasCSFEmployerSig,
+                    HasPDDRegistration = r.HasPDDRegistration,
+                    HasPhilhealthConsumption = r.HasPhilhealthConsumption,
+                    Remarks = r.Remarks,
+                    Patient = new Patient
+                    {
+                        PatientCode = r.Patient.PatientCode,
+                        FirstName = r.Patient.FirstName,
+                        MiddleName = r.Patient.MiddleName,
+                        LastName = r.Patient.LastName
+                    }
+                })
                 .ToListAsync();
-            return View(records);
+
+            var result = new PagedResultModel<PHRequirement>
+            {
+                Items = items,
+                TotalCount = totalCount,
+                Page = page,
+                PageSize = pageSize,
+                Search = search
+            };
+
+            return View(result);
         }
 
         // GET: /PhilhealthRequirements/Create

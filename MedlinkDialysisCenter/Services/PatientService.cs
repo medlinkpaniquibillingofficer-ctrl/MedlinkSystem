@@ -16,13 +16,52 @@ namespace MedlinkDialysisCenter.Services
             _db = db;
         }
 
-        public async Task<List<Patient>> GetActivePatients() =>
-            await _db.Patients
-                .Include(p => p.HepaTest)
-                .Include(p => p.Vaccines)
-                .Where(p => !p.IsDeleted)
+        public async Task<PagedResultModel<PatientViewModel>> GetActivePatients(
+    int page, int pageSize, string? search = null)
+        {
+            var query = _db.Patients
+                .AsNoTracking()
+                .Where(p => !p.IsDeleted);
+
+            if (!string.IsNullOrWhiteSpace(search))
+                query = query.Where(p =>
+                    p.FirstName.Contains(search) ||
+                    p.LastName.Contains(search) ||
+                    (p.PhilhealthNo != null && p.PhilhealthNo.Contains(search)) ||
+                    (p.Diagnosis != null && p.Diagnosis.Contains(search)));
+
+            var total = await query.CountAsync();
+
+            var items = await query
                 .OrderByDescending(p => p.PatientCode)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(p => new PatientViewModel
+                {
+                    PatientId = p.PatientId,
+                    FullName = p.FullName,
+                    PatientCode = p.PatientCode,
+                    FirstInitial = p.FirstName.Substring(0, 1),
+                    LastInitial = p.LastName.Substring(0, 1),
+                    PhilhealthNo = p.PhilhealthNo,
+                    ContactNo = p.ContactNo,
+                    Diagnosis = p.Diagnosis,
+                    Nephrologist = p.Nephrologist,
+                    HasVaccines = p.Vaccines.Any(),
+                    HepaTest = p.HepaTest,
+                    CreatedAt = p.CreatedAt
+                })
                 .ToListAsync();
+
+            return new PagedResultModel<PatientViewModel>
+            {
+                Items = items,
+                TotalCount = total,
+                Page = page,
+                PageSize = pageSize,
+                Search = search
+            };
+        }
 
         public async Task<Patient?> GetByCode(string patientCode) =>
             await _db.Patients

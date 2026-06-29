@@ -1,7 +1,11 @@
-﻿@model IEnumerable<MedlinkDialysisCenter.Models.PHRequirement>
+﻿@model MedlinkDialysisCenter.Models.PagedResultModel<MedlinkDialysisCenter.Models.PHRequirement>
 
 @{
     ViewData["Title"] = "PhilHealth Tracker";
+    int totalComplete   = ViewBag.TotalComplete   ?? 0;
+    int totalIncomplete = ViewBag.TotalIncomplete ?? 0;
+    string? currentCategory = ViewBag.Category;
+    string? currentStatus   = ViewBag.Status;
 }
 
 <!-- Header -->
@@ -24,7 +28,9 @@
         <!-- Add Record Button -->
         <a asp-action="Create"
            class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl no-underline hover:bg-blue-700 transition-colors shadow-sm">
-            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 5v14M5 12h14" />
+            </svg>
             Add Record
         </a>
     </div>
@@ -64,62 +70,82 @@
     </div>
 }
 
-<!-- Stat Cards -->
+<!-- Stat Cards — use ViewBag counts for accurate global totals -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
     <div class="bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm">
         <div class="text-xs text-gray-500 font-medium mb-1">Total Records</div>
-        <div class="text-2xl font-semibold text-blue-600">@Model.Count()</div>
+        <div class="text-2xl font-semibold text-blue-600">@Model.TotalCount</div>
     </div>
     <div class="bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm">
         <div class="text-xs text-gray-500 font-medium mb-1">Complete</div>
-        <div class="text-2xl font-semibold text-green-600">@Model.Count(r => r.IsComplete)</div>
+        <div class="text-2xl font-semibold text-green-600">@totalComplete</div>
     </div>
     <div class="bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm">
         <div class="text-xs text-gray-500 font-medium mb-1">Incomplete</div>
-        <div class="text-2xl font-semibold text-red-500">@Model.Count(r => !r.IsComplete)</div>
+        <div class="text-2xl font-semibold text-red-500">@totalIncomplete</div>
     </div>
     <div class="bg-white border border-gray-200 rounded-xl px-5 py-4 shadow-sm">
         <div class="text-xs text-gray-500 font-medium mb-1">Completion Rate</div>
         <div class="text-2xl font-semibold text-purple-600">
-            @(Model.Any() ? $"{(int)((double)Model.Count(r => r.IsComplete) / Model.Count() * 100)}%" : "0%")
+            @(Model.TotalCount > 0 ? $"{(int)((double)totalComplete / Model.TotalCount * 100)}%" : "0%")
         </div>
     </div>
 </div>
 
-<!-- Filter + Search -->
-<div class="flex flex-wrap gap-3 mb-4">
+<!-- Filter + Search (server-side form) -->
+<form method="get" asp-action="Index" class="flex flex-wrap gap-3 mb-4">
     <div class="relative flex-1 min-w-[200px]">
-        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-        <input type="text" id="searchInput" placeholder="Search patient name..."
+        <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+             width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text"
+               name="search"
+               value="@Model.Search"
+               placeholder="Search patient name..."
                class="w-full pl-10 pr-4 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm focus:outline-none focus:border-blue-500 bg-white transition-colors" />
     </div>
-    <select id="categoryFilter" class="px-4 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-500 cursor-pointer">
+    <select name="category"
+            onchange="this.form.submit()"
+            class="px-4 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-500 cursor-pointer">
         <option value="">All Categories</option>
-        <option value="Senior Citizen">Senior Citizen</option>
-        <option value="Indigent">Indigent</option>
-        <option value="Self-Employed">Self-Employed</option>
-        <option value="Employed Government">Employed Government</option>
+        <option value="Senior Citizen" selected="@(currentCategory == "Senior Citizen" ? "selected" : null)">Senior Citizen</option>
+        <option value="Indigent" selected="@(currentCategory == "Indigent" ? "selected" : null)">Indigent</option>
+        <option value="Self-Employed" selected="@(currentCategory == "Self-Employed" ? "selected" : null)">Self-Employed</option>
+        <option value="Employed Government" selected="@(currentCategory == "Employed Government" ? "selected" : null)">Employed Government</option>
     </select>
-    <select id="statusFilter" class="px-4 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-500 cursor-pointer">
+
+    <select name="status"
+            onchange="this.form.submit()"
+            class="px-4 py-2.5 border-[1.5px] border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-blue-500 cursor-pointer">
         <option value="">All Status</option>
-        <option value="complete">Complete</option>
-        <option value="incomplete">Incomplete</option>
+        <option value="complete" selected="@(currentStatus == "complete" ? "selected" : null)">Complete</option>
+        <option value="incomplete" selected="@(currentStatus == "incomplete" ? "selected" : null)">Incomplete</option>
     </select>
-</div>
+    <input type="hidden" name="page" value="1" />
+</form>
 
 <!-- Table -->
 <div class="bg-white border border-gray-200 rounded-2xl shadow-sm overflow-hidden">
-    @if (!Model.Any())
+    @if (!Model.Items.Any())
     {
         <div class="text-center py-16">
             <div class="text-4xl mb-3 opacity-40">📋</div>
-            <div class="text-base font-medium text-gray-700 mb-1">No records yet</div>
-            <div class="text-sm text-gray-400">Add your first PhilHealth requirement record.</div>
+            @if (!string.IsNullOrWhiteSpace(Model.Search) || !string.IsNullOrWhiteSpace(currentCategory) || !string.IsNullOrWhiteSpace(currentStatus))
+            {
+                <div class="text-base font-medium text-gray-700 mb-1">No records match your filters</div>
+                <div class="text-sm text-gray-400">Try adjusting your search or filter criteria.</div>
+            }
+            else
+            {
+                <div class="text-base font-medium text-gray-700 mb-1">No records yet</div>
+                <div class="text-sm text-gray-400">Add your first PhilHealth requirement record.</div>
+            }
         </div>
     }
     else
     {
-        <!-- Mirror scrollbar: lalabas lang kapag may overflow (split/minimized) -->
         <div id="topScrollbar" class="overflow-x-auto border-b border-gray-100" style="height: 0px; transition: height 0.15s ease;">
             <div id="topScrollbarSpacer" style="height: 1px;"></div>
         </div>
@@ -146,39 +172,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var r in Model)
+                    @foreach (var r in Model.Items)
                     {
-                        <tr class="group border-b border-gray-100 last:border-0 hover:bg-slate-50 transition-colors"
-                            data-category="@r.MemberCategory"
-                            data-status="@(r.IsComplete ? "complete" : "incomplete")">
-
+                        <tr class="group border-b border-gray-100 last:border-0 hover:bg-slate-50 transition-colors">
                             <td class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap sticky left-0 z-10 bg-white group-hover:bg-slate-50 w-[90px] min-w-[90px]">
                                 @r.Patient.PatientCode
                             </td>
-
-                            <!-- Patient Name -->
                             <td class="px-3 py-3 font-medium text-gray-900 whitespace-nowrap sticky left-[90px] z-10 bg-white group-hover:bg-slate-50 w-[150px] min-w-[150px] shadow-[4px_0_6px_-2px_rgba(0,0,0,0.08)]">
                                 @r.Patient.FullName
                             </td>
-
-                            <!-- Category -->
                             <td class="px-3 py-3 whitespace-nowrap w-[120px] min-w-[120px]">
                                 @{
                                     var catClass = r.MemberCategory switch
                                     {
-                                        "Senior Citizen" => "bg-green-50 text-green-700",
-                                        "Indigent" => "bg-orange-50 text-orange-700",
-                                        "Self-Employed" => "bg-blue-50 text-blue-700",
+                                        "Senior Citizen"      => "bg-green-50 text-green-700",
+                                        "Indigent"            => "bg-orange-50 text-orange-700",
+                                        "Self-Employed"       => "bg-blue-50 text-blue-700",
                                         "Employed Government" => "bg-purple-50 text-purple-700",
-                                        _ => "bg-gray-100 text-gray-600"
+                                        _                     => "bg-gray-100 text-gray-600"
                                     };
                                 }
                                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium @catClass">
                                     @(r.MemberCategory ?? "—")
                                 </span>
                             </td>
-
-                            <!-- Requirement checkmarks -->
                             <td class="px-2 py-3 text-center w-[55px] min-w-[55px]">@Html.Raw(r.HasCSF ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-red-400 text-base'>✗</span>")</td>
                             <td class="px-2 py-3 text-center w-[55px] min-w-[55px]">@Html.Raw(r.HasCF2 ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-red-400 text-base'>✗</span>")</td>
                             <td class="px-2 py-3 text-center w-[55px] min-w-[55px]">@Html.Raw(r.HasMDR ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-red-400 text-base'>✗</span>")</td>
@@ -189,8 +206,6 @@
                             <td class="px-2 py-3 text-center w-[80px] min-w-[80px]">@Html.Raw(r.HasCSFEmployerSig ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-gray-300 text-base'>—</span>")</td>
                             <td class="px-2 py-3 text-center w-[60px] min-w-[60px]">@Html.Raw(r.HasPDDRegistration ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-red-400 text-base'>✗</span>")</td>
                             <td class="px-2 py-3 text-center w-[75px] min-w-[75px]">@Html.Raw(r.HasPhilhealthConsumption ? "<span class='text-green-500 text-base font-bold'>✓</span>" : "<span class='text-gray-300 text-base'>—</span>")</td>
-
-                            <!-- Status -->
                             <td class="px-3 py-3 text-center w-[105px] min-w-[105px]">
                                 @if (r.IsComplete)
                                 {
@@ -201,8 +216,6 @@
                                     <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-600">INCOMPLETE</span>
                                 }
                             </td>
-
-                            <!-- Actions -->
                             <td class="px-3 py-3 w-[70px] min-w-[70px]">
                                 <div class="flex items-center gap-1.5">
                                     <a asp-action="Edit" asp-route-id="@r.Id"
@@ -220,33 +233,110 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Pagination -->
+        @if (Model.TotalPages > 1)
+        {
+            <div class="flex items-center justify-between px-5 py-3 border-t border-gray-100">
+                <span class="text-xs text-gray-400">
+                    Showing @((Model.Page - 1) * Model.PageSize + 1)–@(Math.Min(Model.Page * Model.PageSize, Model.TotalCount))
+                    of @Model.TotalCount records
+                </span>
+                <div class="flex items-center gap-1">
+                    <!-- Previous -->
+                    @if (Model.HasPrevious)
+                    {
+                        <a asp-action="Index"
+                           asp-route-page="@(Model.Page - 1)"
+                           asp-route-search="@Model.Search"
+                           asp-route-category="@currentCategory"
+                           asp-route-status="@currentStatus"
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">‹</a>
+                    }
+                    else
+                    {
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-100 text-gray-300 text-sm cursor-not-allowed">‹</span>
+                    }
+
+                    @{
+                        int startPage = Math.Max(1, Model.Page - 2);
+                        int endPage   = Math.Min(Model.TotalPages, Model.Page + 2);
+                    }
+
+                    @if (startPage > 1)
+                    {
+                        <a asp-action="Index" asp-route-page="1"
+                           asp-route-search="@Model.Search"
+                           asp-route-category="@currentCategory"
+                           asp-route-status="@currentStatus"
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">1</a>
+                        @if (startPage > 2)
+                        {
+                            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-400 text-sm">…</span>
+                        }
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        @if (i == Model.Page)
+                        {
+                            <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-blue-500 bg-blue-50 text-blue-600 text-sm font-medium">@i</span>
+                        }
+                        else
+                        {
+                            <a asp-action="Index" asp-route-page="@i"
+                               asp-route-search="@Model.Search"
+                               asp-route-category="@currentCategory"
+                               asp-route-status="@currentStatus"
+                               class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">@i</a>
+                        }
+                    }
+
+                    @if (endPage < Model.TotalPages)
+                    {
+                        @if (endPage < Model.TotalPages - 1)
+                        {
+                            <span class="inline-flex items-center justify-center w-8 h-8 text-gray-400 text-sm">…</span>
+                        }
+                        <a asp-action="Index" asp-route-page="@Model.TotalPages"
+                           asp-route-search="@Model.Search"
+                           asp-route-category="@currentCategory"
+                           asp-route-status="@currentStatus"
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">@Model.TotalPages</a>
+                    }
+
+                    <!-- Next -->
+                    @if (Model.HasNext)
+                    {
+                        <a asp-action="Index"
+                           asp-route-page="@(Model.Page + 1)"
+                           asp-route-search="@Model.Search"
+                           asp-route-category="@currentCategory"
+                           asp-route-status="@currentStatus"
+                           class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-200 text-gray-500 text-sm hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all">›</a>
+                    }
+                    else
+                    {
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg border border-gray-100 text-gray-300 text-sm cursor-not-allowed">›</span>
+                    }
+                </div>
+            </div>
+        }
     }
 </div>
 
 <script>
-    function filterTable() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const cat = document.getElementById('categoryFilter').value;
-        const status = document.getElementById('statusFilter').value;
-
-        document.querySelectorAll('#trackerTable tbody tr').forEach(row => {
-            const name = row.cells[1].textContent.toLowerCase();
-            const rowCat = row.dataset.category ?? '';
-            const rowStatus = row.dataset.status ?? '';
-
-            const matchName = name.includes(q);
-            const matchCat = !cat || rowCat === cat;
-            const matchStatus = !status || rowStatus === status;
-
-            row.style.display = (matchName && matchCat && matchStatus) ? '' : 'none';
+    // Auto-submit search on typing with debounce
+    const searchInput = document.querySelector('input[name="search"]');
+    if (searchInput) {
+        let timer;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => searchInput.closest('form').submit(), 400);
         });
     }
 
-    document.getElementById('searchInput').addEventListener('input', filterTable);
-    document.getElementById('categoryFilter').addEventListener('change', filterTable);
-    document.getElementById('statusFilter').addEventListener('change', filterTable);
-
-    // Mirror scrollbar logic: lalabas lang kapag may overflow (split/minimized)
+    // Mirror scrollbar
     const topScrollbar = document.getElementById('topScrollbar');
     const topScrollbarSpacer = document.getElementById('topScrollbarSpacer');
     const tableScroll = document.getElementById('tableScroll');
@@ -254,29 +344,19 @@
 
     function checkTrackerOverflow() {
         if (!trackerTable || !tableScroll || !topScrollbar) return;
-
         const hasOverflow = trackerTable.scrollWidth > tableScroll.clientWidth;
-
         topScrollbarSpacer.style.width = trackerTable.scrollWidth + 'px';
-
         topScrollbar.style.height = hasOverflow ? '16px' : '0px';
     }
 
     if (topScrollbar && tableScroll && trackerTable) {
         checkTrackerOverflow();
-
         window.addEventListener('resize', checkTrackerOverflow);
-
         if (window.ResizeObserver) {
             const ro = new ResizeObserver(checkTrackerOverflow);
             ro.observe(tableScroll);
         }
-
-        topScrollbar.addEventListener('scroll', () => {
-            tableScroll.scrollLeft = topScrollbar.scrollLeft;
-        });
-        tableScroll.addEventListener('scroll', () => {
-            topScrollbar.scrollLeft = tableScroll.scrollLeft;
-        });
+        topScrollbar.addEventListener('scroll', () => { tableScroll.scrollLeft = topScrollbar.scrollLeft; });
+        tableScroll.addEventListener('scroll', () => { topScrollbar.scrollLeft = tableScroll.scrollLeft; });
     }
 </script>

@@ -15,8 +15,11 @@ namespace MedlinkDialysisCenter.Controllers
             _patientService = patientService;
         }
 
-        public async Task<IActionResult> Index() =>
-            View(await _patientService.GetActivePatients());
+        public async Task<IActionResult> Index(int page = 1, string? search = null){
+            const int pageSize = 7;
+            var result = await _patientService.GetActivePatients(page, pageSize, search);
+            return View(result);
+        }
 
         public async Task<IActionResult> Details(string id)
         {
